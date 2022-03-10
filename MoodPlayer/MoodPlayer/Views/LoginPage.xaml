@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.LoginPage"
+             xmlns:contents="clr-namespace:MoodPlayer.Views.LoginContent"
+             Title="MoodPlayer" Shell.NavBarHasShadow="True" Shell.PresentationMode="Animated"
+             Shell.FlyoutItemIsVisible="True" Shell.TabBarIsVisible="True">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource Secondary}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource Secondary}"/>
+                <Setter Property="Shell.DisabledColor" Value="{DynamicResource Disabled}" />
+                <Setter Property="Shell.UnselectedColor" Value="{DynamicResource Disabled}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource Secondary}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource Disabled}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource Secondary}"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar>
+        <Tab Title="Login">
+            <ShellContent x:Name="LoginUsernameContent" Title="Username" ContentTemplate="{DataTemplate contents:LoginUsernameView}"/>
+            <ShellContent x:Name="LoginEmailContent" Title="Email" ContentTemplate="{DataTemplate contents:LoginEmailView}"/>
+        </Tab>
+        <Tab Title="Register">
+            <ShellContent x:Name="RegisterContent" ContentTemplate="{DataTemplate contents:RegisterView}"/>
+        </Tab>
+    </TabBar>
+</Shell>

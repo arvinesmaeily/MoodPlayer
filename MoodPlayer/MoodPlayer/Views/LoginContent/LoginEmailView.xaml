@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.LoginContent.LoginEmailView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Forgot Password" Order="Primary"/>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Account" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+        <ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Vertical">
+                    <Label Text="Email: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                    <Entry x:Name="entryEmail" Placeholder="Email" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Password: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                <Entry x:Name="entryPassword" Placeholder="Password" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+            </StackLayout>
+            <!--
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Enter Captcha Word:" FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                    <Label x:Name="labelCaptcha" Text="{Binding Path=Term}" FontSize="Subtitle" TextColor="AliceBlue"/>
+                </StackLayout>
+                <Entry x:Name="entryCaptcha" Placeholder="Enter Captcha Word" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            -->
+
+            <Button x:Name="buttonLogin" Text="Login" Clicked="buttonLogin_Clicked"/>
+        </StackLayout>
+        </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

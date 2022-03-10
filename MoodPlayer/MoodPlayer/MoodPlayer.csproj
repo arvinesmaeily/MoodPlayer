@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\IconAudioWave.png" />
+    <None Remove="Resources\IconRecord.png" />
+    <None Remove="Resources\IconSensor.png" />
+    <None Remove="Resources\IconSettings.png" />
+    <None Remove="Resources\IconSpotify.png" />
+    <None Remove="Resources\IconUser.png" />
+    <None Remove="Resources\Playback\IconFavoriteFalse.png" />
+    <None Remove="Resources\Playback\IconFavoriteTrue.png" />
+    <None Remove="Resources\Playback\IconNext.png" />
+    <None Remove="Resources\Playback\IconPause.png" />
+    <None Remove="Resources\Playback\IconPlay.png" />
+    <None Remove="Resources\Playback\IconPrev.png" />
+    <None Remove="Resources\Playback\IconRepeatAll.png" />
+    <None Remove="Resources\Playback\IconRepeatOff.png" />
+    <None Remove="Resources\Playback\IconRepeatOne.png" />
+    <None Remove="Resources\Playback\IconShuffleOff.png" />
+    <None Remove="Resources\Playback\IconShuffleOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icon.png" />
+    <EmbeddedResource Include="Resources\Playback\IconFavoriteFalse.png" />
+    <EmbeddedResource Include="Resources\Playback\IconFavoriteTrue.png" />
+    <EmbeddedResource Include="Resources\Playback\IconNext.png" />
+    <EmbeddedResource Include="Resources\Playback\IconPause.png" />
+    <EmbeddedResource Include="Resources\Playback\IconPlay.png" />
+    <EmbeddedResource Include="Resources\Playback\IconPrev.png" />
+    <EmbeddedResource Include="Resources\Playback\IconRepeatAll.png" />
+    <EmbeddedResource Include="Resources\Playback\IconRepeatOff.png" />
+    <EmbeddedResource Include="Resources\Playback\IconRepeatOne.png" />
+    <EmbeddedResource Include="Resources\Playback\IconShuffleOff.png" />
+    <EmbeddedResource Include="Resources\Playback\IconShuffleOn.png" />
+    <EmbeddedResource Include="Resources\UI\IconAudioWave.png" />
+    <EmbeddedResource Include="Resources\UI\IconRecord.png" />
+    <EmbeddedResource Include="Resources\UI\IconSensor.png" />
+    <EmbeddedResource Include="Resources\UI\IconSettings.png" />
+    <EmbeddedResource Include="Resources\UI\IconSpotify.png" />
+    <EmbeddedResource Include="Resources\UI\IconUser.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Twaddle" Version="1.1.2" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\APIManager\APIManager\APIManager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\System.Drawing.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlayerPage.xaml.cs">
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\LoginContent\LoginEmailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginContent\LoginUsernameView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginContent\RegisterView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

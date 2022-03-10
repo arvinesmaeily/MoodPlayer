@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.SettingsPage">
+    
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton Source="Icon.png" BackgroundColor="Transparent" Padding="2" Margin="2"/>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Mood Player" TextColor="{DynamicResource Secondary}" VerticalTextAlignment="Start" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+                <Label Text="Settings" VerticalTextAlignment="Start" Margin="0"/>
+            </StackLayout>
+        </StackLayout>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>

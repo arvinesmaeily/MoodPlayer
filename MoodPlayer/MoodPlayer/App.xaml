@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.App">
+    
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--Colors-->
+            <Color x:Key="Primary">Black</Color>
+            <Color x:Key="Secondary">White</Color>
+            <Color x:Key="SecondaryDark">LightGray</Color>
+            <Color x:Key="Disabled">DimGray</Color>
+
+            <!--<Color x:Key="LayoutBackground">Black</Color>-->
+            <Color x:Key="Text">WhiteSmoke</Color>
+
+            <Style TargetType="Shell" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="Shell.NavBarHasShadow" Value="True"/>
+                <Setter Property="Shell.PresentationMode" Value="Animated"/>
+                
+            </Style>
+            
+            <!--ContentPage Style-->
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
+            </Style>
+            
+            <!--Button Style-->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+                <Setter Property="BackgroundColor" Value="#333333"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <!--Label Style-->
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            <!--Entry Style-->
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            <!--Frame Style-->
+            <Style TargetType="Frame">
+                <Setter Property="BorderColor" Value="{DynamicResource SecondaryDark}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="VerticalOptions" Value="Fill"/>
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

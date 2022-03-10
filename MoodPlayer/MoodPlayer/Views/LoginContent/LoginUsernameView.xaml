@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.LoginContent.LoginUsernameView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Forgot Password" Order="Primary"/>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Account" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+        <ScrollView>
+        <StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                    <Entry x:Name="entryUsername" Placeholder="Username" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Password: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                    <Entry x:Name="entryPassword" Placeholder="Password" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+                </StackLayout>
+                <Button x:Name="buttonLogin" Clicked="buttonLogin_Clicked" Text="Login"/>
+        </StackLayout>
+        </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

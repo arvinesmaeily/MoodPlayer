@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="MoodPlayer.Views.ProfilePage">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton Source="Icon.png" BackgroundColor="Transparent" Padding="2" Margin="2"/>
+            <StackLayout Orientation="Vertical">
+                <Label Text="Mood Player" TextColor="{DynamicResource Secondary}" VerticalTextAlignment="Start" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+                <Label Text="Profile" VerticalTextAlignment="Start" Margin="0"/>
+            </StackLayout>
+        </StackLayout>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <Frame></Frame>
+            <Label Text="MoodPlayer" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="ID: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="id" Text="{Binding Path=ID}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="username" Text="{Binding Path=Username}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="email" Text="{Binding Path=Email}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Last Login: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="lastLogin" Text="{Binding Path=LastLogin}"/>
+            </StackLayout>
+            
+            <Frame></Frame>
+            <Label Text="Spotify" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Authorized Spotify Access: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="stateSpotify" Text="{Binding Path=SpotifyAuthorized}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Token: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                <Label x:Name="spotifyToken" Text="{Binding Path=SpotifyToken}"/>
+            </StackLayout>
+            
+            <Button x:Name="buttonConnectSpotify" Clicked="buttonConnectSpotify_Clicked" Text="Connect Spotify" BackgroundColor="Green"/>
+            <Frame></Frame>
+            <Label Text="Logout" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
+            <Button x:Name="buttonLogout" Clicked="buttonLogout_Clicked" Text="Logout" BackgroundColor="OrangeRed"/>
+
+            <Frame></Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
