@@ -1,4 +1,5 @@
 ﻿
+using DataCollectionManager.DependencyServices;
 using MoodPlayer.ViewNavigation;
 using MoodPlayer.Views;
 using System;
@@ -16,7 +17,17 @@ namespace MoodPlayer
 
             if (Settings.AppSettings.AccountSettings.ClientAuthorized == true)
             {
-                NavigationManager.GotoMain();
+                var tokenValidationResponse = APIManager.Account.AccountManager.TokenValidation().Result;
+                if (tokenValidationResponse.Code == "200")
+                {
+                    NavigationManager.GotoMain();
+                    DependencyService.Get<IScreenManager>().KeepOn();
+                    APIManager.Resources.user_token = Settings.AppSettings.AccountSettings.ClientToken;
+                }
+                else
+                {
+                    MainPage.DisplayAlert("Authorization Failed", tokenValidationResponse.Error, "Okay");
+                }
             }
             else
             {

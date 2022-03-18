@@ -1,4 +1,7 @@
-﻿using MoodPlayer.Views;
+﻿using DataCollectionManager.DependencyServices;
+using DataCollectionManager.MasterDataManager;
+using DataCollectionManager.Voice.VoiceUtils;
+using MoodPlayer.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +21,17 @@ namespace MoodPlayer.Views
         {
             InitializeComponent();
             InitializeInterface();
+            //DataRecordingManager.Record(Settings.AppSettings.AccountInfo.ID);
+            VoiceController.TurnOn();
         }
 
         private void InitializeInterface()
         {
             NervousnessColorChange();
-
-            Settings.AppSettings.DataCollectionSettings.PropertyChanged += DataCollectionSettings_PropertyChanged;
-            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(Settings.AppSettings.DataCollectionSettings.CollectSpotify)));
-            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(Settings.AppSettings.DataCollectionSettings.CollectSPSensor)));
-            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(Settings.AppSettings.DataCollectionSettings.CollectVoice)));
+            DataCollectionManager.Settings.AppSettings.DataCollectionSettings.PropertyChanged += DataCollectionSettings_PropertyChanged;
+            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify)));
+            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor)));
+            DataCollectionSettings_PropertyChanged(null, new PropertyChangedEventArgs(nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice)));
         }
 
         private void NervousnessColorChange()
@@ -90,7 +94,7 @@ namespace MoodPlayer.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-        }
+        }       
 
         private void DataCollectionSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -98,13 +102,13 @@ namespace MoodPlayer.Views
             var disableColor = Color.OrangeRed;
             var grayedoutColor = Color.LightGray;
 
-            if(e.PropertyName == nameof(Settings.AppSettings.DataCollectionSettings.CollectSpotify))
+            if(e.PropertyName == nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify))
             {
-                if(Settings.AppSettings.DataCollectionSettings.CollectSpotify == true)
+                if(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify == true)
                 {
                     SpotifyToggle.BackgroundColor = enableColor;
                 }
-                else if(Settings.AppSettings.DataCollectionSettings.CollectSpotify == false)
+                else if(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify == false)
                 {
                     SpotifyToggle.BackgroundColor = disableColor;
                 }
@@ -114,13 +118,13 @@ namespace MoodPlayer.Views
                 }
             }
 
-            if (e.PropertyName == nameof(Settings.AppSettings.DataCollectionSettings.CollectVoice))
+            if (e.PropertyName == nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice))
             {
-                if (Settings.AppSettings.DataCollectionSettings.CollectVoice == true)
+                if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice == true)
                 {
                     VoiceToggle.BackgroundColor = enableColor;
                 }
-                else if (Settings.AppSettings.DataCollectionSettings.CollectVoice == false)
+                else if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice == false)
                 {
                     VoiceToggle.BackgroundColor = disableColor;
                 }
@@ -130,13 +134,13 @@ namespace MoodPlayer.Views
                 }
             }
 
-            if (e.PropertyName == nameof(Settings.AppSettings.DataCollectionSettings.CollectSPSensor))
+            if (e.PropertyName == nameof(DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor))
             {
-                if (Settings.AppSettings.DataCollectionSettings.CollectSPSensor == true)
+                if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor == true)
                 {
                     SPSensorToggle.BackgroundColor = enableColor;
                 }
-                else if (Settings.AppSettings.DataCollectionSettings.CollectSPSensor == false)
+                else if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor == false)
                 {
                     SPSensorToggle.BackgroundColor = disableColor;
                 }
@@ -149,26 +153,27 @@ namespace MoodPlayer.Views
 
         private void SpotifyToggle_Clicked(object sender, EventArgs e)
         {
-            if (Settings.AppSettings.DataCollectionSettings.CollectSpotify == true)
-                Settings.AppSettings.DataCollectionSettings.CollectSpotify = false;
+            if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify == true)
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify = false;
             else
-                Settings.AppSettings.DataCollectionSettings.CollectSpotify = true;
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSpotify = true;
         }
 
         private void SPSensorToggle_Clicked(object sender, EventArgs e)
         {
-            if (Settings.AppSettings.DataCollectionSettings.CollectSPSensor == true)
-                Settings.AppSettings.DataCollectionSettings.CollectSPSensor = false;
+            if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor == true)
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor = false;
             else
-                Settings.AppSettings.DataCollectionSettings.CollectSPSensor = true;
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor = true;
         }
 
         private void VoiceToggle_Clicked(object sender, EventArgs e)
         {
-            if (Settings.AppSettings.DataCollectionSettings.CollectVoice == true)
-                Settings.AppSettings.DataCollectionSettings.CollectVoice = false;
+            if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice == true)
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice = false;
             else
-                Settings.AppSettings.DataCollectionSettings.CollectVoice = true;
+                DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectVoice = true;
         }
     }
+
 }
