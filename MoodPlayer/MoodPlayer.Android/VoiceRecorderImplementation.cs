@@ -1,5 +1,7 @@
 ﻿using Android.Media;
 using DataCollectionManager.DependencyServices;
+using DataCollectionManager.Voice.VoiceDataUtils;
+using DataCollectionManager.Voice.VoiceUtils;
 using MoodPlayer.Droid;
 using System;
 using System.Diagnostics;
@@ -24,36 +26,44 @@ namespace MoodPlayer.Droid
         AudioRecord audioRecorder;
         
         [MTAThread]
-        [Obsolete]
-        public async void Record()
+        public void Record()
         {
             audioBuffer = new byte[ArrayLength];
 
             audioRecorder = new AudioRecord(audioSource, sampleRate, channelIn, encoding, ArrayLength);
 
-            await Task.Run(() =>
+
+            if (!IsRecording)
             {
-                if (!IsRecording)
-                {   
-                    
-                    audioRecorder.StartRecording();
+
+                audioRecorder.StartRecording();
+                ulong sequence_no = 0;
+                Task.Run(() =>
+                {
                     while (true)
                     {
-
                         audioRecorder.Read(audioBuffer, 0, ArrayLength);
-
+                        VoiceController.CurrentReadingRecord.DateTime = DateTime.Now;
+                        VoiceController.CurrentReadingRecord.ChannelType = channelIn.ToString();
+                        VoiceController.CurrentReadingRecord.Encoding = encoding.ToString();
+                        VoiceController.CurrentReadingRecord.SequenceId = sequence_no;
+                        VoiceController.CurrentReadingRecord.Length = ArrayLength;
+                        VoiceController.CurrentReadingRecord.SampleRate = sampleRate;
+                        VoiceController.CurrentReadingRecord.Data = audioBuffer;
+                        sequence_no++;
+                        
                     }
-                }
-            });
+                });
+            }
 
         }
 
 
 
         [MTAThread]
-        public async void Stop()
+        public void Stop()
         {
-            await Task.Run(() =>
+            Task.Run(() =>
             {
                 if (IsRecording)
                 {

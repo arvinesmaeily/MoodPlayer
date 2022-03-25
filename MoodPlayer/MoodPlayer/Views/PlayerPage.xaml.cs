@@ -1,6 +1,7 @@
 ﻿using DataCollectionManager.DependencyServices;
 using DataCollectionManager.MasterDataManager;
 using DataCollectionManager.Voice.VoiceUtils;
+using DisplayAlertManager.Dialogs;
 using MoodPlayer.Views;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,10 @@ namespace MoodPlayer.Views
         {
             InitializeComponent();
             InitializeInterface();
+
+            
             //DataRecordingManager.Record(Settings.AppSettings.AccountInfo.ID);
-            VoiceController.TurnOn();
+            //VoiceController.TurnOn();
         }
 
         private void InitializeInterface()
@@ -142,7 +145,7 @@ namespace MoodPlayer.Views
                 }
                 else if (DataCollectionManager.Settings.AppSettings.DataCollectionSettings.CollectSPSensor == false)
                 {
-                    SPSensorToggle.BackgroundColor = disableColor;
+                    SPSensorToggle.BackgroundColor = disableColor;      
                 }
                 else
                 {

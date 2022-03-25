@@ -47,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AiForms.Dialogs" Version="1.0.14" />
     <PackageReference Include="SMG.CrossPlatform.AudioLibrary" Version="1.3.0" />
     <PackageReference Include="Twaddle" Version="1.1.2" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
@@ -55,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DisplayAlertManager\DisplayAlertManager\DisplayAlertManager.csproj" />
     <ProjectReference Include="..\..\..\APIManager\APIManager\APIManager.csproj" />
     <ProjectReference Include="..\..\..\DataCollectionManager\DataCollectionManager\DataCollectionManager.csproj" />
   </ItemGroup>
