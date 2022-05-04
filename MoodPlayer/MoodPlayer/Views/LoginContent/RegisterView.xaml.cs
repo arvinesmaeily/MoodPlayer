@@ -2,6 +2,7 @@
 using APIManager.Account.Models.Responses;
 using MoodPlayer.Extensions;
 using MoodPlayer.ViewNavigation;
+using SettingsManager;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -64,13 +65,13 @@ namespace MoodPlayer.Views.LoginContent
                             }
                             else
                             {
-                                Settings.AppSettings.AccountSettings.ClientAuthorized = true;
-                                Settings.AppSettings.AccountSettings.ClientToken = result2.data.user.accessTokens[result2.data.user.accessTokens.Length - 1];
+                                AppSettings.AccountSettings.ClientAuthorized = true;
+                                AppSettings.AccountSettings.ClientToken = result2.data.user.accessTokens[result2.data.user.accessTokens.Length - 1];
 
-                                Settings.AppSettings.AccountInfo.ID = result2.data.user.id;
-                                Settings.AppSettings.AccountInfo.Username = result2.data.user.username;
-                                Settings.AppSettings.AccountInfo.Email = result2.data.user.email;
-                                Settings.AppSettings.AccountInfo.LastLogin = result2.data.user.lastLogin;
+                                AppSettings.AccountInfo.ID = result2.data.user.id;
+                                AppSettings.AccountInfo.Username = result2.data.user.username;
+                                AppSettings.AccountInfo.Email = result2.data.user.email;
+                                AppSettings.AccountInfo.LastLogin = result2.data.user.lastLogin;
                                 NavigationManager.GotoMain();
                             }
                         }

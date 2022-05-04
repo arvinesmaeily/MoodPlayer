@@ -15,28 +15,24 @@ namespace MoodPlayer.Droid
     {
         public bool IsRecording = false;
 
-        public int sampleRate = 44100;
-        public int ArrayLength = 100000;
-        public ChannelIn channelIn = ChannelIn.Mono;
-        public AudioSource audioSource = AudioSource.Mic;
-        public Encoding encoding = Encoding.Pcm16bit;
+        public const int sampleRate = 44100;
+        public const int ArrayLength = 100000;
+        public const ChannelIn channelIn = ChannelIn.Mono;
+        public const AudioSource audioSource = AudioSource.Mic;
+        public const Encoding encoding = Encoding.Pcm16bit;
 
-        byte[] audioBuffer;
+        byte[] audioBuffer = new byte[ArrayLength];
 
-        AudioRecord audioRecorder;
+        AudioRecord audioRecorder = new AudioRecord(audioSource, sampleRate, channelIn, encoding, ArrayLength);
         
         [MTAThread]
         public void Record()
         {
-            audioBuffer = new byte[ArrayLength];
-
-            audioRecorder = new AudioRecord(audioSource, sampleRate, channelIn, encoding, ArrayLength);
-
 
             if (!IsRecording)
             {
-
                 audioRecorder.StartRecording();
+
                 ulong sequence_no = 0;
                 Task.Run(() =>
                 {
@@ -46,7 +42,7 @@ namespace MoodPlayer.Droid
                         VoiceController.CurrentReadingRecord.DateTime = DateTime.Now;
                         VoiceController.CurrentReadingRecord.ChannelType = channelIn.ToString();
                         VoiceController.CurrentReadingRecord.Encoding = encoding.ToString();
-                        VoiceController.CurrentReadingRecord.SequenceId = sequence_no;
+                        VoiceController.CurrentReadingRecord.SequenceId = sequence_no.ToString();
                         VoiceController.CurrentReadingRecord.Length = ArrayLength;
                         VoiceController.CurrentReadingRecord.SampleRate = sampleRate;
                         VoiceController.CurrentReadingRecord.Data = audioBuffer;

@@ -22,50 +22,61 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Vertical">
-                <Frame></Frame>
-                <StackLayout>
-                        <Label Text="Data Transmit" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="Large" TextColor="{DynamicResource Secondary}"/>
-                        <StackLayout Orientation="Horizontal" Margin="10,00,10,0">
-                            <ImageButton x:Name="SpotifyToggle" Clicked="SpotifyToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconSpotify.png}" HorizontalOptions="StartAndExpand" BackgroundColor="LightGray"  CornerRadius="5" MinimumWidthRequest="50"/>
-                        <ImageButton x:Name="SPSensorToggle" Clicked="SPSensorToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconSensor.png}" HorizontalOptions="CenterAndExpand" BackgroundColor="LightGray" CornerRadius="5" MinimumWidthRequest="50"/>
-                        <ImageButton x:Name="VoiceToggle" Clicked="VoiceToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconRecord.png}" HorizontalOptions="EndAndExpand" BackgroundColor="LightGray" CornerRadius="5" MinimumWidthRequest="50"/>
-                        </StackLayout>
+            <!--
+            <Frame></Frame>
+            
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Label Text="Data Transmit" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="Large" TextColor="{DynamicResource Secondary}"/>
+                <StackLayout Orientation="Horizontal" Margin="10,0,10,0" HorizontalOptions="FillAndExpand"> 
+                    
+                    <ImageButton x:Name="SpotifyToggle" Clicked="SpotifyToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconSpotify.png}" BackgroundColor="LightGray"  CornerRadius="5" HorizontalOptions="FillAndExpand"/>
+                    <ImageButton x:Name="SPSensorToggle" Clicked="SPSensorToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconSensor.png}" BackgroundColor="LightGray" CornerRadius="5" HorizontalOptions="FillAndExpand"/>
+                    
                     </StackLayout>
-                
-                <Frame></Frame>
-                <StackLayout Orientation="Horizontal" Margin="10,0,10,0">
-                        <Label FontSize="Large" Text="Driving Nervousness:" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{DynamicResource Secondary}"/>
-                        <Frame BackgroundColor="{DynamicResource nervousness}" BorderColor="{DynamicResource nervousness}" HorizontalOptions="FillAndExpand" HeightRequest="50" CornerRadius="1"/>
-                    </StackLayout>
-                
             </StackLayout>
-            <StackLayout>
-                <Frame></Frame>
-                <StackLayout Margin="10,0,10,0">
-                    <Image x:Name="songImage" Source="{local:ImageResource MoodPlayer.Resources.Icon.png}" WidthRequest="250" HeightRequest="250"/>
-                    <Label x:Name="labelSongTitle" Text="Song Title" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                    <Label x:Name="labelSongArtist" Text="Song Artist" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                    <Label x:Name="labelSongAlbum" Text="Song Album" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+            -->
+            <Frame></Frame>
+            
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Label Text="Music Controller" HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="Large" TextColor="{DynamicResource Secondary}"/>
+                <!--<Label FontSize="Large" Text="Driving Nervousness:" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{DynamicResource Secondary}"/>
+                        <Frame BackgroundColor="{DynamicResource nervousness}" BorderColor="{DynamicResource nervousness}" HorizontalOptions="FillAndExpand" HeightRequest="50" CornerRadius="1"/>-->
+                <StackLayout Orientation="Horizontal" Margin="10,0,10,0" HorizontalOptions="FillAndExpand">
+                    <ImageButton x:Name="LearningToggle" Clicked="LearningToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconLearning.png}" BackgroundColor="{Binding Path=Color}" CornerRadius="5" HorizontalOptions="FillAndExpand"/>
+                    <ImageButton x:Name="AutopilotToggle" Source="{local:ImageResource MoodPlayer.Resources.UI.IconAutopilot.png}" BackgroundColor="LightGray" CornerRadius="5" HorizontalOptions="FillAndExpand"/>
+                    <ImageButton x:Name="VoiceToggle" Clicked="VoiceToggle_Clicked" Source="{local:ImageResource MoodPlayer.Resources.UI.IconRecord.png}" BackgroundColor="LightGray" CornerRadius="5" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
             </StackLayout>
+
             <Frame></Frame>
-            <StackLayout Margin="10,0,10,0">
-                <StackLayout Margin="0,10,0,10" Orientation="Horizontal">
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconShuffleOff.png}" HorizontalOptions="StartAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconFavoriteFalse.png}" HorizontalOptions="CenterAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconRepeatOff.png}" HorizontalOptions="EndAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                    </StackLayout>
-                <StackLayout Margin="0,10,0,10" Orientation="Horizontal">
-                        <Slider HorizontalOptions="FillAndExpand" ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}" />
-                    </StackLayout>
-                <StackLayout Margin="0,10,0,10" Orientation="Horizontal" >
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconPrev.png}" HorizontalOptions="StartAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconPlay.png}" HorizontalOptions="CenterAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                    <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconNext.png}" HorizontalOptions="EndAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
-                </StackLayout>
+
+            <StackLayout Margin="0,10,0,10">
+                <Image x:Name="songImage" Source="{local:ImageResource MoodPlayer.Resources.Icon.png}" MinimumWidthRequest="250" MinimumHeightRequest="250"/>
+                <Label x:Name="labelSongTitle" Text="Song Title" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="labelSongArtist" Text="Song Artist" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="labelSongAlbum" Text="Song Album" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
+
             <Frame></Frame>
+
+            <StackLayout Margin="0,10,0,10" Orientation="Horizontal">
+                <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconShuffleOff.png}" HorizontalOptions="StartAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+                <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconFavoriteFalse.png}" HorizontalOptions="CenterAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+                <ImageButton Source="{local:ImageResource MoodPlayer.Resources.Playback.IconRepeatOff.png}" HorizontalOptions="EndAndExpand" WidthRequest="40" HeightRequest="40" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+            </StackLayout>
+            
+            <StackLayout Margin="0,10,0,10" Orientation="Horizontal">
+                <Slider HorizontalOptions="FillAndExpand" ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}" />
+            </StackLayout>
+            
+            <StackLayout Margin="0,10,0,10" Orientation="Horizontal" >
+                <ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" Source="{local:ImageResource MoodPlayer.Resources.Playback.IconPrev.png}" HorizontalOptions="StartAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+                <ImageButton x:Name="buttonPlay" Clicked="buttonPlay_Clicked" Source="{local:ImageResource MoodPlayer.Resources.Playback.IconPlay.png}" HorizontalOptions="CenterAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+                <ImageButton x:Name="buttonNext" Clicked="buttonNext_Clicked" Source="{local:ImageResource MoodPlayer.Resources.Playback.IconNext.png}" HorizontalOptions="EndAndExpand" CornerRadius="5" BackgroundColor="{DynamicResource Secondary}"/>
+            </StackLayout>
+
+            <Frame></Frame>
+       
         </StackLayout>
     </ContentPage.Content>
 

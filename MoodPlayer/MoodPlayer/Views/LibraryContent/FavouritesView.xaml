@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.LibraryContent.FavouritesView">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="listViewItems" RowHeight="70">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding SongImageURL}"/>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Path=Title}" FontAttributes="Bold" FontSize="Large"/>
+                                        <Label Text="{Binding Path=Artist}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

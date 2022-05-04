@@ -39,7 +39,7 @@
                 <Label Text="Last Login: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
                 <Label x:Name="lastLogin" Text="{Binding Path=LastLogin}"/>
             </StackLayout>
-            
+            <!--
             <Frame></Frame>
             <Label Text="Spotify" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
             
@@ -52,8 +52,9 @@
                 <Label Text="Token: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
                 <Label x:Name="spotifyToken" Text="{Binding Path=SpotifyToken}"/>
             </StackLayout>
-            
+
             <Button x:Name="buttonConnectSpotify" Clicked="buttonConnectSpotify_Clicked" Text="Connect Spotify" BackgroundColor="Green"/>
+            -->
             <Frame></Frame>
             <Label Text="Logout" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
             <Button x:Name="buttonLogout" Clicked="buttonLogout_Clicked" Text="Logout" BackgroundColor="OrangeRed"/>

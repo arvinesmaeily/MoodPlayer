@@ -1,8 +1,13 @@
 ﻿
+using APIManager.Account;
+using APIManager.Account.Models.Responses;
 using DataCollectionManager.DependencyServices;
 using MoodPlayer.ViewNavigation;
 using MoodPlayer.Views;
+using MusicPlayer.MusicUtil;
+using SettingsManager;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,35 +20,39 @@ namespace MoodPlayer
         public App()
         {
             InitializeComponent();
+            CheckCredentials();
+            var color = (Color)Current.Resources["Secondary"];
 
-            if (Settings.AppSettings.AccountSettings.ClientAuthorized == true)
+            MusicPlayer.Models.MusicData.ThemeColor = (color.ToHex().Remove(0,3));
+
+            Library.Load();
+            Player.Current.SetQueue(Library.Data);
+        }
+
+        private static void CheckCredentials()
+        {
+            APIManager.Resources.user_token = AppSettings.AccountSettings.ClientToken;
+            if (AppSettings.AccountSettings.ClientAuthorized == true)
             {
-                var tokenValidationResponse = APIManager.Account.AccountManager.TokenValidation().Result;
+                TokenValidationResponse tokenValidationResponse = AccountManager.TokenValidation().Result;
                 if (tokenValidationResponse.Code == "200")
                 {
                     NavigationManager.GotoMain();
                     DependencyService.Get<IScreenManager>().KeepOn();
-                    APIManager.Resources.user_token = Settings.AppSettings.AccountSettings.ClientToken;
-                    
+
+
                 }
                 else
                 {
-                    MainPage.DisplayAlert("Authorization Failed", tokenValidationResponse.Error, "Okay");
+                    NavigationManager.GotoLogin();
+                    DisplayAlertManager.AlertPresenter.PresentToast("Authorization Failed" + "\nError Code: " + tokenValidationResponse.Code + "\n Error Message: " + tokenValidationResponse.Error, Int32.MaxValue);
+
                 }
             }
             else
             {
                 NavigationManager.GotoLogin();
             }
-        }
-        public static void PresentAlert(string title, string message, string cancel)
-        {
-            Current.MainPage.DisplayAlert(title, message, cancel);
-        }
-
-        public static Task<string> PresentPromptAsync(string title, string message, string accept, string cancel)
-        {
-            return Current.MainPage.DisplayPromptAsync(title, message, accept, cancel);
         }
 
         protected override void OnStart()

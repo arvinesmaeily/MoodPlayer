@@ -2,6 +2,7 @@
 using APIManager.Account.Models.Responses;
 using MoodPlayer.Extensions;
 using MoodPlayer.ViewNavigation;
+using SettingsManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,13 +50,13 @@ namespace MoodPlayer.Views.LoginContent
                     }
                     else
                     {
-                        Settings.AppSettings.AccountSettings.ClientAuthorized = true;
-                        Settings.AppSettings.AccountSettings.ClientToken = result.data.user.accessTokens[result.data.user.accessTokens.Length - 1];
+                        AppSettings.AccountSettings.ClientAuthorized = true;
+                        AppSettings.AccountSettings.ClientToken = result.data.user.accessTokens[result.data.user.accessTokens.Length - 1];
 
-                        Settings.AppSettings.AccountInfo.ID = result.data.user.id;
-                        Settings.AppSettings.AccountInfo.Username = result.data.user.username;
-                        Settings.AppSettings.AccountInfo.Email = result.data.user.email;
-                        Settings.AppSettings.AccountInfo.LastLogin = result.data.user.lastLogin;
+                        AppSettings.AccountInfo.ID = result.data.user.id;
+                        AppSettings.AccountInfo.Username = result.data.user.username;
+                        AppSettings.AccountInfo.Email = result.data.user.email;
+                        AppSettings.AccountInfo.LastLogin = result.data.user.lastLogin;
                         //captcha.Generate();
                         NavigationManager.GotoMain();
                     }

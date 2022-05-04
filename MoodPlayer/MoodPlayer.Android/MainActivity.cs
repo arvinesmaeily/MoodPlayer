@@ -7,11 +7,11 @@ using Android.OS;
 using Android;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
-
+using MediaManager;
 
 namespace MoodPlayer.Droid
 {
-    [Activity(Label = "MoodPlayer", Icon = "@mipmap/icon", Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(LaunchMode = LaunchMode.SingleTop,Label = "MoodPlayer", Icon = "@mipmap/icon", Theme = "@style/MyTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static MainActivity Instance { get; internal set; }
@@ -19,10 +19,11 @@ namespace MoodPlayer.Droid
         {
             Instance = this;
             base.OnCreate(savedInstanceState);
-            
+            CrossMediaManager.Current.Init();
+
             global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
             AiForms.Dialogs.Dialogs.Init(this); //need to write here
-
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

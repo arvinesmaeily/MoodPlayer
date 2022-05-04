@@ -1,4 +1,5 @@
 ﻿using MoodPlayer.ViewNavigation;
+using SettingsManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +17,19 @@ namespace MoodPlayer.Views
         {
             InitializeComponent();
             
-            id.BindingContext = Settings.AppSettings.AccountInfo;
-            username.BindingContext = Settings.AppSettings.AccountInfo;
-            email.BindingContext = Settings.AppSettings.AccountInfo;
-            lastLogin.BindingContext = Settings.AppSettings.AccountInfo;
+            id.BindingContext = AppSettings.AccountInfo;
+            username.BindingContext = AppSettings.AccountInfo;
+            email.BindingContext = AppSettings.AccountInfo;
+            lastLogin.BindingContext = AppSettings.AccountInfo;
 
-            stateSpotify.BindingContext = Settings.AppSettings.AccountSettings;
-            spotifyToken.BindingContext = Settings.AppSettings.AccountSettings;
-        }
-
-        private void buttonConnectSpotify_Clicked(object sender, EventArgs e)
-        {
-
+            //stateSpotify.BindingContext = AppSettings.AccountSettings;
+            //spotifyToken.BindingContext = AppSettings.AccountSettings;
         }
 
         private void buttonLogout_Clicked(object sender, EventArgs e)
         {
-            Settings.AppSettings.AccountInfo.Clear();
-            Settings.AppSettings.AccountSettings.Clear();
+            AppSettings.AccountInfo.Clear();
+            AppSettings.AccountSettings.Clear();
             NavigationManager.GotoLogin();
         }
     }
