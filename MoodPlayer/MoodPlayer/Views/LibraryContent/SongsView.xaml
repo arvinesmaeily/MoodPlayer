@@ -1,23 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MoodPlayer.Extensions"
              x:Class="MoodPlayer.Views.LibraryContent.SongsView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewItems" RowHeight="70">
+            <ListView x:Name="listViewItems" RowHeight="70" ItemSelected="listViewItems_ItemSelected"  SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" >
 
-                <ListView.ItemTemplate>
+                <ListView.ItemTemplate x:DataType="{DataTemplate template:MediaItem}">
                     <DataTemplate>
                         <ViewCell>
-                            <Frame>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding SongImageURL}"/>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="{Binding Path=Title}" FontAttributes="Bold" FontSize="Large"/>
-                                        <Label Text="{Binding Path=Artist}"/>
-                                    </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                <Image Source="{Binding Path=ArtUri}"/>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Path=Title}" FontAttributes="Bold" FontSize="Large"/>
+                                    <Label Text="{Binding Path=Artist}"/>
                                 </StackLayout>
-                            </Frame>
+                            </StackLayout>
                         </ViewCell>
 
                     </DataTemplate>

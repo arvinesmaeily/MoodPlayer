@@ -39,13 +39,14 @@ namespace MoodPlayer.Droid
                     while (true)
                     {
                         audioRecorder.Read(audioBuffer, 0, ArrayLength);
-                        VoiceController.CurrentReadingRecord.DateTime = DateTime.Now;
+                        VoiceController.CurrentReadingRecord.DateTime = DataCollectionManager.MasterDataManager.DataRecordingManager.DateTimeToString(DateTime.Now);
                         VoiceController.CurrentReadingRecord.ChannelType = channelIn.ToString();
                         VoiceController.CurrentReadingRecord.Encoding = encoding.ToString();
                         VoiceController.CurrentReadingRecord.SequenceId = sequence_no.ToString();
                         VoiceController.CurrentReadingRecord.Length = ArrayLength;
                         VoiceController.CurrentReadingRecord.SampleRate = sampleRate;
-                        VoiceController.CurrentReadingRecord.Data = audioBuffer;
+                        
+                        VoiceController.CurrentReadingRecord.Data = System.Text.Encoding.Default.GetString(audioBuffer);
                         sequence_no++;
                         
                     }

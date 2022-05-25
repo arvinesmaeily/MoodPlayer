@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZPF.Media;
 
 namespace MoodPlayer.Views.LibraryContent
 {
@@ -16,7 +17,20 @@ namespace MoodPlayer.Views.LibraryContent
         public ArtistsView()
         {
             InitializeComponent();
-            listViewItems.ItemsSource = Library.Data;
+            listViewItems.ItemsSource = Library.Artists;
+        }
+
+        private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as ArtistItem;
+
+            if(item != null)
+            {
+                var List = Library.ArtistsDict[item.Artist];
+
+                this.Navigation.PushAsync(new SelectedItemView(item.Artist, List));
+            }
+            listViewItems.SelectedItem = null;
         }
     }
 }

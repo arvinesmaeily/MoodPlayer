@@ -16,7 +16,21 @@ namespace MoodPlayer.Views.LibraryContent
         public GenresView()
         {
             InitializeComponent();
-            listViewItems.ItemsSource = Library.Data;
+            listViewItems.ItemsSource = Library.Genres;
+        }
+
+        private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as GenreItem;
+
+            if(item != null)
+            {
+                var List = Library.GenresDict[item.Genre];
+
+                this.Navigation.PushAsync(new SelectedItemView(item.Genre, List));
+
+            }
+            listViewItems.SelectedItem = null;
         }
     }
 }

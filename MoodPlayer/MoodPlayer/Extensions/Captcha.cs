@@ -10,13 +10,13 @@ namespace MoodPlayer.Extensions
         private string _Term { get; set; }
         public string Term
         {
-            get { return this._Term; }
+            get { return _Term; }
 
             set
             {
-                if (value != this._Term)
+                if (value != _Term)
                 {
-                    this._Term = value;
+                    _Term = value;
                     OnPropertyChanged("Term");
                 }
             }
@@ -31,7 +31,7 @@ namespace MoodPlayer.Extensions
         [MTAThread]
         public Captcha ShallowCopy()
         {
-            return (Captcha)this.MemberwiseClone();
+            return (Captcha)MemberwiseClone();
         }
 
         // INotifyPropertyChanged implementation

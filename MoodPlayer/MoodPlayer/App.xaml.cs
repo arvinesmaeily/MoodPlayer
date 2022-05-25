@@ -2,8 +2,10 @@
 using APIManager.Account;
 using APIManager.Account.Models.Responses;
 using DataCollectionManager.DependencyServices;
+using DataCollectionManager.MasterDataManager;
 using MoodPlayer.ViewNavigation;
 using MoodPlayer.Views;
+using MusicPlayer;
 using MusicPlayer.MusicUtil;
 using SettingsManager;
 using System;
@@ -16,7 +18,6 @@ namespace MoodPlayer
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
@@ -25,10 +26,27 @@ namespace MoodPlayer
 
             MusicPlayer.Models.MusicData.ThemeColor = (color.ToHex().Remove(0,3));
 
-            Library.Load();
-            Player.Current.SetQueue(Library.Data);
+            
+            //Player.Current.SetQueue(Library.Data);
         }
-
+        public static void SetRecordTransmit(string action)
+        {
+            if(action == "start")
+            {
+                if (!DataRecordingManager.Status.IsTransmitting)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOn);
+                if (!DataRecordingManager.Status.IsRecording)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOn);
+            }
+            if(action == "stop")
+            {
+                if (DataRecordingManager.Status.IsRecording)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOff);
+                if (DataRecordingManager.Status.IsTransmitting)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
+                
+            }
+        }
         private static void CheckCredentials()
         {
             APIManager.Resources.user_token = AppSettings.AccountSettings.ClientToken;
@@ -40,7 +58,8 @@ namespace MoodPlayer
                     NavigationManager.GotoMain();
                     DependencyService.Get<IScreenManager>().KeepOn();
 
-
+                    Player.Initialize();
+                    Library.Load();
                 }
                 else
                 {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodPlayer.Views.LibraryContent.GenresView">
+             x:Class="MoodPlayer.Views.LibraryContent.SelectedItemView">
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="listViewItems" ItemSelected="listViewItems_ItemSelected" RowHeight="70" SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" >
@@ -10,9 +10,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Path=Composer}"/>
+                                <Image Source="{Binding Path=ArtUri}"/>
                                 <StackLayout Orientation="Vertical">
-                                    <Label Text="{Binding Path=Genre}" FontAttributes="Bold" FontSize="Large"/>
+                                    <Label Text="{Binding Path=Title}" FontAttributes="Bold" FontSize="Large"/>
+                                    <Label Text="{Binding Path=Artist}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

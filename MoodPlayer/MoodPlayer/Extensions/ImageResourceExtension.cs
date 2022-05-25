@@ -11,6 +11,7 @@ namespace MoodPlayer.Extensions
     public class ImageResourceExtension : IMarkupExtension
     {
         public string Source { get; set; }
+
         [MTAThread]
         public object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -23,6 +24,11 @@ namespace MoodPlayer.Extensions
             var imageSource = ImageSource.FromResource(Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
 
             return imageSource;
+        }
+
+        public ImageSource GetImageSource(string resourcepath)
+        {
+            return ImageSource.FromResource(resourcepath, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
         }
     }
 }

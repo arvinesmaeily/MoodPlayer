@@ -1,23 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
              x:Class="MoodPlayer.Views.LibraryContent.AlbumsView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewItems" RowHeight="70">
+            <ListView x:Name="listViewItems" ItemSelected="listViewItems_ItemSelected" RowHeight="70" SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" >
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame>
                             <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding AlbumImageURL}"/>
-                                    <StackLayout Orientation="Vertical">
+                                <Image Source="{Binding Path=AlbumArtUri}"/>
+                                <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Path=Album}" FontAttributes="Bold" FontSize="Large"/>
                                     <Label Text="{Binding Path=Artist}"/>
                                 </StackLayout>
                             </StackLayout>
-                            </Frame>
                         </ViewCell>
 
                     </DataTemplate>

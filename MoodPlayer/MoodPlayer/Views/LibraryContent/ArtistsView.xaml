@@ -4,19 +4,17 @@
              x:Class="MoodPlayer.Views.LibraryContent.ArtistsView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewItems" RowHeight="70">
+            <ListView x:Name="listViewItems" ItemSelected="listViewItems_ItemSelected" RowHeight="70" SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" >
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding ArtistImageURL}"/>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="{Binding Path=Artist}" FontAttributes="Bold" FontSize="Large"/>
-                                    </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding AlbumArtist}"/>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Path=Artist}" FontAttributes="Bold" FontSize="Large"/>
                                 </StackLayout>
-                            </Frame>
+                            </StackLayout>
                         </ViewCell>
 
                     </DataTemplate>

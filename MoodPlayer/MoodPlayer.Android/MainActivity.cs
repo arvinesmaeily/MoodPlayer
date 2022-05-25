@@ -7,7 +7,7 @@ using Android.OS;
 using Android;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
-using MediaManager;
+
 
 namespace MoodPlayer.Droid
 {
@@ -19,17 +19,29 @@ namespace MoodPlayer.Droid
         {
             Instance = this;
             base.OnCreate(savedInstanceState);
-            CrossMediaManager.Current.Init();
 
-            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
-            AiForms.Dialogs.Dialogs.Init(this); //need to write here
-            
+
+            PrepareAlertManager();
+            PrepareMusicPlayer();
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
             RequirePermissions();
         }
+
+        private void PrepareMusicPlayer()
+        {
+            ZPF.Media.MediaPlayer.Current.Init(this);
+        }
+
+        private void PrepareAlertManager()
+        {
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+            AiForms.Dialogs.Dialogs.Init(this); //need to write here
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

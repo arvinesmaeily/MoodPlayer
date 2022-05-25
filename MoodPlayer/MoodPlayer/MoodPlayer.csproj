@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icon.png" />
-    <Resource Include="Resources\Library\IconMusicAlbum.png" />
     <EmbeddedResource Include="Resources\Playback\IconFavoriteFalse.png" />
     <EmbeddedResource Include="Resources\Playback\IconFavoriteTrue.png" />
     <EmbeddedResource Include="Resources\Playback\IconNext.png" />
@@ -43,6 +42,7 @@
     <EmbeddedResource Include="Resources\Playback\IconRepeatOne.png" />
     <EmbeddedResource Include="Resources\Playback\IconShuffleOff.png" />
     <EmbeddedResource Include="Resources\Playback\IconShuffleOn.png" />
+    <Resource Include="Resources\Library\IconMusicAlbum.png" />
     <EmbeddedResource Include="Resources\UI\IconAudioWave.png" />
     <EmbeddedResource Include="Resources\UI\IconAutopilot.png" />
     <EmbeddedResource Include="Resources\UI\IconLearning.png" />
@@ -56,12 +56,12 @@
 
   <ItemGroup>
     <PackageReference Include="AiForms.Dialogs" Version="1.0.16" />
-    <PackageReference Include="Plugin.MediaManager" Version="1.1.0" />
-    <PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
+    <PackageReference Include="Plugin.MediaManager" Version="1.1.1" />
     <PackageReference Include="SMG.CrossPlatform.AudioLibrary" Version="1.3.0" />
-    <PackageReference Include="Twaddle" Version="1.1.2" />
+    <PackageReference Include="Twaddle" Version="1.1.2" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />  
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
+    <PackageReference Include="ZPFMediaPlayer" Version="0.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -98,13 +98,10 @@
     <EmbeddedResource Update="Views\LibraryContent\ArtistsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LibraryContent\FavouritesView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\LibraryContent\GenresView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LibraryContent\QueueView.xaml">
+    <EmbeddedResource Update="Views\LibraryContent\SelectedItemView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LibraryContent\SongsView.xaml">

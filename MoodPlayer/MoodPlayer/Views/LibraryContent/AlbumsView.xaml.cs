@@ -1,5 +1,4 @@
-﻿using MediaManager.Library;
-using MusicPlayer.MusicUtil;
+﻿using MusicPlayer.MusicUtil;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +17,22 @@ namespace MoodPlayer.Views.LibraryContent
         public AlbumsView()
         {
             InitializeComponent();
-            listViewItems.ItemsSource = Library.Data;
+
+            listViewItems.ItemsSource = Library.Albums;
+            
+        }
+
+        private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as AlbumItem;
+
+            if(item != null)
+            {
+                var List = Library.AlbumsDict[item.Album];
+
+                this.Navigation.PushAsync(new SelectedItemView(item.Album, List));
+            }
+            listViewItems.SelectedItem = null;
         }
     }
 }
