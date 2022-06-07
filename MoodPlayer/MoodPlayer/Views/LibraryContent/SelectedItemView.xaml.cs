@@ -1,4 +1,6 @@
-﻿using MusicPlayer;
+﻿using MediaManager.Library;
+using MediaManager.Player;
+using MusicPlayer;
 using MusicPlayer.MusicUtil;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,6 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ZPF.Media;
 
 namespace MoodPlayer.Views.LibraryContent
 {
@@ -31,15 +32,12 @@ namespace MoodPlayer.Views.LibraryContent
 
         private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MediaItem;
 
-            if (item != null)
-            {
                 Library.SetPlaylist(MediaItems);
-                Library.BeginningItem(item);
-                if (Player.GetMediaPlayer().State == MediaPlayerState.Playing)
+                Library.BeginningItem(e.SelectedItemIndex);
+                if (Player.MediaPlayer.State != MediaPlayerState.Playing)
                     App.SetRecordTransmit("start");
-            }
+            
             listViewItems.SelectedItem = null;
 
         }

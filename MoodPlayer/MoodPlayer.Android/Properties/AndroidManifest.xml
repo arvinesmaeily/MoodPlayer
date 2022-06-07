@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0a" package="com.norc.moodplayer" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
-	<application android:label="MoodPlayer" android:theme="@style/MainTheme" android:icon="@drawable/Icon"></application>
+	<application android:label="MoodPlayer" android:theme="@style/MainTheme" android:icon="@drawable/Icon" android:largeHeap="true" android:hardwareAccelerated="true" android:persistent="true" ></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -18,4 +18,5 @@
 	<uses-permission android:name="android.permission.MANAGE_MEDIA" />
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	
 </manifest>

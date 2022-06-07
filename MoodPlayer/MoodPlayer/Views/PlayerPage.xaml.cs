@@ -2,9 +2,13 @@
 using DataCollectionManager.MasterDataManager;
 using DataCollectionManager.Voice.VoiceUtils;
 using DisplayAlertManager.Dialogs;
+using MediaManager.Playback;
+using MediaManager.Player;
+using MediaManager.Queue;
 using MoodPlayer.Extensions;
 using MoodPlayer.Views;
 using MusicPlayer;
+using MusicPlayer.MusicUtil;
 using SettingsManager;
 using System;
 using System.Collections.Generic;
@@ -16,197 +20,125 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ZPF.Media;
+
 
 namespace MoodPlayer.Views
 {
     public partial class PlayerPage : ContentPage
     {
+
+        private PlayerIcons PlayerIcons = new PlayerIcons();
+
         public PlayerPage()
         {
             InitializeComponent();
+            buttonShuffle.BindingContext = this.PlayerIcons;
+            buttonPlay.BindingContext = this.PlayerIcons;
+            buttonRepeat.BindingContext = this.PlayerIcons;
 
-            Player.GetMediaPlayer().MediaItemChanged += PlayerPage_MediaItemChanged;
-            Player.GetMediaPlayer().PositionChanged += PlayerPage_PositionChanged;
-            Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
+            DataCollectionManager.Music.MusicDataUtils.MusicRecordManager.CurrentReadingRecord.PropertyChanged += CurrentReadingRecord_PropertyChanged;
+            
+            Player.MediaPlayer.PositionChanged += PlayerPage_PositionChanged;
+            Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
+            InitializeButtons();
+
         }
 
-        private void PlayerPage_MediaItemChanged(object sender, MediaItemEventArgs e)
+        private void CurrentReadingRecord_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            labelMusicRecordQueueCount.Text = DataCollectionManager.Music.MusicDataUtils.MusicRecordManager.Records.Count.ToString();
+            labelSensorRecordQueueCount.Text = DataCollectionManager.SmartphoneSensors.SPSensorDataUtils.SPSensorRecordManager.Records.Count.ToString();
+            labelVoiceRecordQueueCount.Text = DataCollectionManager.Voice.VoiceDataUtils.VoiceRecordManager.Records.Count.ToString();
+        }
 
-            labelSongArtist.Text = Player.GetMediaPlayer().Playlist.Current.Artist;
-            labelSongTitle.Text = Player.GetMediaPlayer().Playlist.Current.Title;
-            songImage.Source = Player.GetMediaPlayer().Playlist.Current.ArtUri;
+        private void InitializeButtons()
+        {
+            Player.MediaQueue.ShuffleModeChanged += MediaQueue_ShuffleModeChanged;
+            Player.MediaQueue.RepeatModeChanged += MediaQueue_RepeatModeChanged;
+            Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
+            PlayerSettings_PropertyChanged(null, null);
+            RepeatModeChangedEventArgs repeatModeChangedEventArgs = new RepeatModeChangedEventArgs() { RepeatMode = Player.MediaQueue.RepeatMode };
+            ShuffleModeChangedEventArgs shuffleModeChangedEventArgs = new ShuffleModeChangedEventArgs() { ShuffleMode = Player.MediaQueue.ShuffleMode };
+            MediaQueue_RepeatModeChanged(null, repeatModeChangedEventArgs);
+            MediaQueue_ShuffleModeChanged(null, shuffleModeChangedEventArgs);
         }
 
         private void PlayerSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            SetButtonsIcons();
+            //playback mode
+            if (Player.PlayerSettings.IsPlaying)
+            {
+                PlayerIcons.PlayIcon = "https://i.postimg.cc/wvnXd4My/Icon-Pause.png";
+            }
+            else if (!(Player.PlayerSettings.IsPlaying))
+            {
+                PlayerIcons.PlayIcon = "https://i.postimg.cc/44hv1G2z/IconPlay.png";
+            }
         }
 
-        private void PlayerPage_PositionChanged(object sender, ZPF.Media.PositionChangedEventArgs e)
+        private void MediaQueue_RepeatModeChanged(object sender, RepeatModeChangedEventArgs e)
         {
-            Task.Run(() =>
+            //repeat settings
+            if (e.RepeatMode == RepeatMode.All)
             {
-                labelDuration.Text = e.Duration.ToString(@"mm\:ss");
-                labelPosition.Text = e.Position.ToString(@"mm\:ss");
-
-
-            });
-
-            Task.Run(() =>
+                Player.PlayerSettings.Repeat = RepeatMode.All.ToString();
+                PlayerIcons.RepeatIcon = "https://i.postimg.cc/SN6WwrhR/Icon-Repeat-All.png";
+            }
+            else if (e.RepeatMode == RepeatMode.One)
             {
-                sliderPosition.Value = (e.Position.TotalSeconds / e.Duration.TotalSeconds);
-            });   
-
+                Player.PlayerSettings.Repeat = RepeatMode.One.ToString();
+                PlayerIcons.RepeatIcon = "https://i.postimg.cc/bwL1vwdj/Icon-Repeat-One.png";
+            }
+            else if (e.RepeatMode == RepeatMode.Off)
+            {
+                Player.PlayerSettings.Repeat = RepeatMode.Off.ToString();
+                PlayerIcons.RepeatIcon = "https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png";
+            }
         }
 
-        private void SetButtonsIcons()
+        private void MediaQueue_ShuffleModeChanged(object sender, ShuffleModeChangedEventArgs e)
         {
             //shuffle settings
-            if (Player.GetMediaPlayer().Playlist.ShuffleMode == ShuffleMode.On)
+            if (e.ShuffleMode == ShuffleMode.All)
             {
-                Debug.WriteLine(Player.GetMediaPlayer().Playlist.ShuffleMode);
-                buttonShuffle.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/FKBcjCjW/Icon-Shuffle-On.png"));
+                Player.PlayerSettings.Shuffle = ShuffleMode.All.ToString();
+                PlayerIcons.ShuffleIcon = "https://i.postimg.cc/FKBcjCjW/Icon-Shuffle-On.png";
             }
-            else if (Player.GetMediaPlayer().Playlist.ShuffleMode == ShuffleMode.Off)
+            else if (e.ShuffleMode == ShuffleMode.Off)
             {
-                Debug.WriteLine(Player.GetMediaPlayer().Playlist.ShuffleMode);
-                buttonShuffle.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png"));
-            }
-
-            //repeat settings
-            if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.All)
-            {
-                Debug.WriteLine(Player.GetMediaPlayer().Playlist.RepeatMode);
-                buttonRepeat.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/SN6WwrhR/Icon-Repeat-All.png"));
-            }
-            else if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.One)
-            {
-                Debug.WriteLine(Player.GetMediaPlayer().Playlist.RepeatMode);
-                buttonRepeat.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/bwL1vwdj/Icon-Repeat-One.png"));
-            }
-            else if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.Off)
-            {
-                Debug.WriteLine(Player.GetMediaPlayer().Playlist.RepeatMode);
-                buttonRepeat.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png"));
-            }
-
-            //playback mode
-            if (Player.GetMediaPlayer().State == MediaPlayerState.Playing)
-            {
-                buttonPlay.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/wvnXd4My/Icon-Pause.png"));
-            }
-            else if(!(Player.GetMediaPlayer().State == MediaPlayerState.Playing))
-            {
-                buttonPlay.Source = ImageSource.FromUri(new Uri("https://i.postimg.cc/44hv1G2z/IconPlay.png"));
+                Player.PlayerSettings.Shuffle = ShuffleMode.Off.ToString();
+                PlayerIcons.ShuffleIcon = "https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png";
             }
         }
 
-
-
-
-
-        /*        private void NervousnessColorChange()
-                {
-                    Task.Run(() =>
-                    {
-                        int rMax = (int)(Color.Red.R * 255);
-                        int rMid = (int)(Color.White.R * 255);
-                        int rMin = (int)(Color.Blue.R * 255);
-                        int gMax = (int)(Color.Red.G * 255);
-                        int gMid = (int)(Color.White.G * 255);
-                        int gMin = (int)(Color.Blue.G * 255);
-                        int bMax = (int)(Color.Red.B * 255);
-                        int bMid = (int)(Color.White.B * 255);
-                        int bMin = (int)(Color.Blue.B * 255);
-
-                        int size = 50;
-
-                        var colorList = new List<Color>();
-                        for (int i = 0; i < size; i++)
-                        {
-                            var rAverage = rMin + ((rMid - rMin) * i / size);
-                            var gAverage = gMin + ((gMid - gMin) * i / size);
-                            var bAverage = bMin + ((bMid - bMin) * i / size);
-                            colorList.Add(Color.FromRgb(rAverage, gAverage, bAverage));
-                        }
-                        for (int i = 0; i < size; i++)
-                        {
-                            var rAverage = rMid + ((rMax - rMid) * i / size);
-                            var gAverage = gMid + ((gMax - gMid) * i / size);
-                            var bAverage = bMid + ((bMax - bMid) * i / size);
-                            colorList.Add(Color.FromRgb(rAverage, gAverage, bAverage));
-                        }
-                        int j = 0;
-                        while (true)
-                        {
-                            if (j == 0)
-                            {
-                                for (j = 0; j < colorList.Count; j++)
-                                {
-                                    Resources["nervousness"] = colorList[j];
-                                    Task.Delay(100).Wait();
-                                }
-                                j = colorList.Count - 1;
-                            }
-                            if (j == (colorList.Count - 1))
-                            {
-                                for (j = colorList.Count - 1; j >= 0; j--)
-                                {
-                                    Resources["nervousness"] = colorList[j];
-                                    Task.Delay(100).Wait();
-                                }
-                                j = 0;
-                            }
-                        }
-
-                    });
-                }*/
-
-        private void DataCollectionSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MediaQueue_CurrentItemChanged(object sender, MusicPlayer.MusicUtil.CurrentItemChangedEventArgs e)
         {
-            var enableColor = Color.LimeGreen;
-            var disableColor = Color.OrangeRed;
-            var grayedoutColor = Color.LightGray;
+            labelSongArtist.Text = Player.MediaQueue.CurrentItem.Artist;
+            labelSongTitle.Text = Player.MediaQueue.CurrentItem.Title;
+            songImage.Source = ImageSource.FromUri(new Uri(Player.MediaQueue.CurrentItem.ImageUri));
+            labelDuration.Text = Player.MediaPlayer.Duration.ToString(@"mm\:ss");
+        }
 
-            if (e.PropertyName == nameof(AppSettings.DataCollectionSettings.CollectVoice))
+        private void PlayerPage_PositionChanged(object sender, MediaManager.Playback.PositionChangedEventArgs e)
+        {
+            Device.InvokeOnMainThreadAsync((() =>
             {
-                if (AppSettings.DataCollectionSettings.CollectVoice == true)
-                {
-                    //VoiceToggle.BackgroundColor = enableColor;
-                }
-                else if (AppSettings.DataCollectionSettings.CollectVoice == false)
-                {
-                    //VoiceToggle.BackgroundColor = disableColor;
-                }
-                else
-                {
-                    //VoiceToggle.BackgroundColor = grayedoutColor;
-                }
-            }
-
+                labelPosition.Text = e.Position.ToString(@"mm\:ss");
+                sliderPosition.Value = (e.Position.TotalSeconds / Player.MediaPlayer.Duration.TotalSeconds);
+            }));
         }
 
-        private void VoiceToggle_Clicked(object sender, EventArgs e)
-        {
-            if (AppSettings.DataCollectionSettings.CollectVoice == true)
-                AppSettings.DataCollectionSettings.CollectVoice = false;
-            else
-                AppSettings.DataCollectionSettings.CollectVoice = true;
-        }
-
-        private void LearningToggle_Clicked(object sender, EventArgs e) 
-        {
-            
-        }
 
         private void buttonPlay_Clicked(object sender, EventArgs e)
         {
-            
-            Player.PlayPause();
-            if(Player.GetMediaPlayer().State == MediaPlayerState.Playing)
-            App.SetRecordTransmit("start");
+            if (Player.MediaPlayer.State != MediaPlayerState.Playing)
+            {
+                Player.Play();
+                App.SetRecordTransmit("start");
+            }
+            else
+                Player.Pause();
+            App.SetRecordTransmit("stop");
 
         }
 
@@ -222,19 +154,7 @@ namespace MoodPlayer.Views
 
         private void buttonShuffle_Clicked(object sender, EventArgs e)
         {
-            if (Player.GetMediaPlayer().Playlist.Count > 0)
-            {
-                if (Player.GetMediaPlayer().Playlist.ShuffleMode == ShuffleMode.Off)
-                {
-                    Player.GetMediaPlayer().Playlist.ShuffleMode = ShuffleMode.On;
-                    Player.PlayerSettings.Shuffle = Player.GetMediaPlayer().Playlist.ShuffleMode.ToString();
-                }
-                else
-                {
-                    Player.GetMediaPlayer().Playlist.ShuffleMode = ShuffleMode.Off;
-                    Player.PlayerSettings.Shuffle = Player.GetMediaPlayer().Playlist.ShuffleMode.ToString();
-                }
-            }
+            Player.ChangeShuffle();
         }
         private void buttonFavorite_Clicked(object sender, EventArgs e)
         {
@@ -243,24 +163,9 @@ namespace MoodPlayer.Views
 
         private void buttonRepeat_Clicked(object sender, EventArgs e)
         {
-            if (Player.GetMediaPlayer().Playlist.Count > 0)
+            if (Player.MediaPlayer.Queue.Count > 0)
             {
-
-                if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.Off)
-                {
-                    Player.GetMediaPlayer().Playlist.RepeatMode = RepeatMode.One;
-                    Player.PlayerSettings.Repeat = Player.GetMediaPlayer().Playlist.RepeatMode.ToString();
-                }
-                else if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.One)
-                {
-                    Player.GetMediaPlayer().Playlist.RepeatMode = RepeatMode.All;
-                    Player.PlayerSettings.Repeat = Player.GetMediaPlayer().Playlist.RepeatMode.ToString();
-                }
-                else if (Player.GetMediaPlayer().Playlist.RepeatMode == RepeatMode.All)
-                {
-                    Player.GetMediaPlayer().Playlist.RepeatMode = RepeatMode.Off;
-                    Player.PlayerSettings.Repeat = Player.GetMediaPlayer().Playlist.RepeatMode.ToString();
-                }
+                Player.ChangeRepeat();
             }
         }
     }

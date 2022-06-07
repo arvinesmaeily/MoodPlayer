@@ -142,9 +142,6 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>5.0.0.2401</Version>
     </PackageReference>
-    <PackageReference Include="ZPFMediaPlayer">
-      <Version>0.3.2</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

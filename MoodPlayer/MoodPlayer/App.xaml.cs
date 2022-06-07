@@ -29,24 +29,7 @@ namespace MoodPlayer
             
             //Player.Current.SetQueue(Library.Data);
         }
-        public static void SetRecordTransmit(string action)
-        {
-            if(action == "start")
-            {
-                if (!DataRecordingManager.Status.IsTransmitting)
-                    DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOn);
-                if (!DataRecordingManager.Status.IsRecording)
-                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOn);
-            }
-            if(action == "stop")
-            {
-                if (DataRecordingManager.Status.IsRecording)
-                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOff);
-                if (DataRecordingManager.Status.IsTransmitting)
-                    DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
-                
-            }
-        }
+
         private static void CheckCredentials()
         {
             APIManager.Resources.user_token = AppSettings.AccountSettings.ClientToken;
@@ -71,6 +54,25 @@ namespace MoodPlayer
             else
             {
                 NavigationManager.GotoLogin();
+            }
+        }
+        public static void SetRecordTransmit(string action)
+        {
+            if (action == "start")
+            {
+                if (!DataRecordingManager.Status.IsRecording)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOn);
+                if (!DataRecordingManager.Status.IsTransmitting)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOn);
+
+            }
+            if (action == "stop")
+            {
+                if (DataRecordingManager.Status.IsRecording)
+                    DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOff);
+                //if (DataRecordingManager.Status.IsTransmitting)
+                    //DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
+
             }
         }
 

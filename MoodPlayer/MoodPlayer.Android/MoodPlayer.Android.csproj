@@ -37,8 +37,14 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
-    <MandroidI18n />
+    <MandroidI18n>CJK;Mideast;Rare;West;Other</MandroidI18n>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidSupportedAbis />
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,9 +92,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms">
       <Version>5.0.0.2401</Version>
-    </PackageReference>
-    <PackageReference Include="ZPFMediaPlayer">
-      <Version>0.3.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

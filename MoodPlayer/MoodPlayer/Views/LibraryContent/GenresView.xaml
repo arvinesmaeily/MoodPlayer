@@ -10,7 +10,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Path=Composer}"/>
+                                <Image>
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Path=Composer}"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Path=Genre}" FontAttributes="Bold" FontSize="Large"/>
                                 </StackLayout>

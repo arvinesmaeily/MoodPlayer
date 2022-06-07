@@ -9,6 +9,7 @@
             <Label Text="Mood Player" TextColor="{DynamicResource Secondary}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
         </StackLayout>
     </Shell.TitleView>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="nervousness">White</Color>
@@ -19,13 +20,14 @@
         <ToolbarItem />
         <ToolbarItem />
     </ContentPage.ToolbarItems>
-
+    
     <ContentPage.Content>
 
         <Grid Margin="5" Padding="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -35,30 +37,46 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Row="0">
-                <Image x:Name="songImage" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source=""/>
+            <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image x:Name="songImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Image.Source>
+                        <UriImageSource Uri="" CachingEnabled="True" CacheValidity="1"/>
+                    </Image.Source>
+                </Image>
+            </StackLayout>
 
+            <StackLayout Grid.Row="1" VerticalOptions="End" Orientation="Vertical">
                 <Label x:Name="labelSongTitle" HorizontalTextAlignment="Center" VerticalOptions="End" Text="-" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                 <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalOptions="End" Text="-" FontSize="Default" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="End" MinimumHeightRequest="10">
-                <ImageButton x:Name="buttonShuffle" Clicked="buttonShuffle_Clicked" Source="https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png" HorizontalOptions="StartAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-                
-                <ImageButton x:Name="buttonRepeat" Clicked="buttonRepeat_Clicked" Source="https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png" HorizontalOptions="EndAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" VerticalOptions="End" MinimumHeightRequest="10">
+                <ImageButton x:Name="buttonShuffle" Clicked="buttonShuffle_Clicked" Source="{Binding Path=ShuffleIcon}" HorizontalOptions="StartAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
+                <Label x:Name="labelMusicRecordQueueCount" Text="0" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                <Label x:Name="labelSensorRecordQueueCount" Text="0" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                <Label x:Name="labelVoiceRecordQueueCount" Text="0" FontSize="Small" HorizontalOptions="FillAndExpand"/>
+                <ImageButton x:Name="buttonRepeat" Clicked="buttonRepeat_Clicked" Source="{Binding Path=RepeatIcon}" HorizontalOptions="EndAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
             </StackLayout>
 
-            <Slider Grid.Row="2" x:Name="sliderPosition" HorizontalOptions="FillAndExpand" VerticalOptions="End" ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}" />
+            <Slider Grid.Row="3" x:Name="sliderPosition" HorizontalOptions="FillAndExpand" VerticalOptions="End" ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}" />
 
-            <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label x:Name="labelDuration" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="StartAndExpand"/>
                 <Label x:Name="labelPosition" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="4" Orientation="Horizontal" VerticalOptions="End" Spacing="40">
-                <ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" Source="https://i.postimg.cc/c4yR9zPP/IconPrev.png" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-                <ImageButton x:Name="buttonPlay" Clicked="buttonPlay_Clicked" Source="https://i.postimg.cc/44hv1G2z/IconPlay.png" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-                <ImageButton x:Name="buttonNext" Clicked="buttonNext_Clicked" Source="https://i.postimg.cc/pr8DVQ50/IconNext.png" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
+            <StackLayout Grid.Row="5" Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="40">
+                <ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
+                    <ImageButton.Source>
+                        <UriImageSource Uri="https://i.postimg.cc/c4yR9zPP/IconPrev.png" CachingEnabled="True" CacheValidity="1"/>
+                    </ImageButton.Source>
+                </ImageButton>
+                <ImageButton x:Name="buttonPlay" Clicked="buttonPlay_Clicked" Source="{Binding Path=PlayIcon}" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
+                <ImageButton x:Name="buttonNext" Clicked="buttonNext_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
+                    <ImageButton.Source>
+                        <UriImageSource Uri="https://i.postimg.cc/pr8DVQ50/IconNext.png" CachingEnabled="True" CacheValidity="1"/>
+                    </ImageButton.Source>
+                </ImageButton>
             </StackLayout>
         </Grid>
 

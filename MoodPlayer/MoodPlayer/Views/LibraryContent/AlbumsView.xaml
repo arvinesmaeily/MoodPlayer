@@ -11,7 +11,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Path=AlbumArtUri}"/>
+                                <Image>
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Path=AlbumImageUri}"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding Path=Album}" FontAttributes="Bold" FontSize="Large"/>
                                     <Label Text="{Binding Path=Artist}"/>

@@ -7,7 +7,7 @@ using Android.OS;
 using Android;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
-
+using Android.Content;
 
 namespace MoodPlayer.Droid
 {
@@ -26,14 +26,17 @@ namespace MoodPlayer.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
             RequirePermissions();
+            LoadApplication(new App());
+
+            
+
         }
 
         private void PrepareMusicPlayer()
         {
-            ZPF.Media.MediaPlayer.Current.Init(this);
+            MediaManager.CrossMediaManager.Current.Init();
         }
 
         private void PrepareAlertManager()
@@ -74,9 +77,14 @@ namespace MoodPlayer.Droid
                     Manifest.Permission_group.Microphone,
                     Manifest.Permission_group.Network,
                     Manifest.Permission_group.Sensors,
-                    Manifest.Permission_group.Screenlock
+                    Manifest.Permission_group.Screenlock,
+                    Manifest.Permission_group.HardwareControls,
+                    Manifest.Permission.WakeLock,
+                    
                 }, 1);
+                
             }
+            
         }
     }
 }
