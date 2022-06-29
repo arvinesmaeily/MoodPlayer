@@ -112,15 +112,15 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\APIManager\APIManager\APIManager.csproj">
+    <ProjectReference Include="..\..\..\APIManager-MoodPlayer\APIManager\APIManager.csproj">
       <Project>{01abbd2d-3739-4805-9142-f9fbb60775e7}</Project>
       <Name>APIManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DataCollectionManager\DataCollectionManager\DataCollectionManager.csproj">
+    <ProjectReference Include="..\..\..\DataCollectionManager-MoodPlayer\DataCollectionManager\DataCollectionManager.csproj">
       <Project>{085360cb-3c66-413b-8ece-0f42275207b4}</Project>
       <Name>DataCollectionManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DisplayAlertManager\DisplayAlertManager\DisplayAlertManager.csproj">
+    <ProjectReference Include="..\..\..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj">
       <Project>{3bfa2d88-a557-403b-a52e-5dab37fff2a9}</Project>
       <Name>DisplayAlertManager</Name>
     </ProjectReference>

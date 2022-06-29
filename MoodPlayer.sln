@@ -9,15 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodPlayer.iOS", "MoodPlaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodPlayer", "MoodPlayer\MoodPlayer\MoodPlayer.csproj", "{AC06475A-6B62-49DD-9DD3-3650F01F5AEE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIManager", "..\APIManager\APIManager\APIManager.csproj", "{01ABBD2D-3739-4805-9142-F9FBB60775E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIManager", "..\APIManager-MoodPlayer\APIManager\APIManager.csproj", "{01ABBD2D-3739-4805-9142-F9FBB60775E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCollectionManager", "..\DataCollectionManager\DataCollectionManager\DataCollectionManager.csproj", "{085360CB-3C66-413B-8ECE-0F42275207B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCollectionManager", "..\DataCollectionManager-MoodPlayer\DataCollectionManager\DataCollectionManager.csproj", "{085360CB-3C66-413B-8ECE-0F42275207B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayAlertManager", "..\DisplayAlertManager\DisplayAlertManager\DisplayAlertManager.csproj", "{3BFA2D88-A557-403B-A52E-5DAB37FFF2A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayAlertManager", "..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj", "{3BFA2D88-A557-403B-A52E-5DAB37FFF2A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsManager", "..\SettingsManager\SettingsManager\SettingsManager.csproj", "{A8CDA5B4-36B3-4783-BB62-B2C8C6AD6F75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsManager", "..\SettingsManager-MoodPlayer\SettingsManager\SettingsManager.csproj", "{A8CDA5B4-36B3-4783-BB62-B2C8C6AD6F75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicPlayer", "..\MusicPlayer\MusicPlayer\MusicPlayer.csproj", "{953061F6-46F6-4937-812C-294C40CF28AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicPlayer", "..\MusicPlayer-MoodPlayer\MusicPlayer\MusicPlayer.csproj", "{953061F6-46F6-4937-812C-294C40CF28AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

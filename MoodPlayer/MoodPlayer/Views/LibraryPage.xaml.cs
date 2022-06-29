@@ -22,7 +22,8 @@ namespace MoodPlayer.Views
 
         override protected void OnAppearing()
         {
-            try
+
+            /*try
             {
                 Library.Load();
             }
@@ -36,7 +37,7 @@ namespace MoodPlayer.Views
                 Debug.WriteLine(e.Source);
                 Debug.WriteLine(e.StackTrace);
                 Debug.WriteLine(e.TargetSite);
-            }
+            }*/
         }
     }
 }
