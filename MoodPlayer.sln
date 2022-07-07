@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsManager", "..\Setti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicPlayer", "..\MusicPlayer-MoodPlayer\MusicPlayer\MusicPlayer.csproj", "{953061F6-46F6-4937-812C-294C40CF28AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyManager", "DependencyManager\DependencyManager.csproj", "{8C7EB303-DB24-489B-87D9-77968501132C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,18 @@ Global
 		{953061F6-46F6-4937-812C-294C40CF28AE}.Release|iPhone.Build.0 = Release|Any CPU
 		{953061F6-46F6-4937-812C-294C40CF28AE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{953061F6-46F6-4937-812C-294C40CF28AE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|iPhone.Build.0 = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8C7EB303-DB24-489B-87D9-77968501132C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

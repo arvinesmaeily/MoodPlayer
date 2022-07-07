@@ -1,4 +1,4 @@
-﻿using DataCollectionManager.DependencyServices;
+﻿using DependencyManager;
 using DataCollectionManager.MasterDataManager;
 using DataCollectionManager.Voice.VoiceUtils;
 using DisplayAlertManager.Dialogs;

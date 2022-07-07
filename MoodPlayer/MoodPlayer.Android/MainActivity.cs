@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -17,6 +16,7 @@ namespace MoodPlayer.Droid
         public static MainActivity Instance { get; internal set; }
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             Instance = this;
             base.OnCreate(savedInstanceState);
 
@@ -27,10 +27,10 @@ namespace MoodPlayer.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
-            RequirePermissions();
+            
             LoadApplication(new App());
 
-            
+            RequirePermissions();
 
         }
 
@@ -53,8 +53,7 @@ namespace MoodPlayer.Droid
         }
         private void RequirePermissions()
         {
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) != Permission.Granted)
-            {
+            
                 ActivityCompat.RequestPermissions(this, new string[] {
                     Manifest.Permission.AccessNetworkState,
                     Manifest.Permission.Internet,
@@ -72,18 +71,21 @@ namespace MoodPlayer.Droid
                     Manifest.Permission.ManageMedia,
                     Manifest.Permission.ModifyAudioSettings,
                     Manifest.Permission.RecordAudio,
+                    Manifest.Permission.ManageExternalStorage,
+                    Manifest.Permission.ReadExternalStorage,
+                    Manifest.Permission.WriteExternalStorage,
                     Manifest.Permission_group.Display,
-                    Manifest.Permission_group.HardwareControls,
                     Manifest.Permission_group.Microphone,
                     Manifest.Permission_group.Network,
                     Manifest.Permission_group.Sensors,
                     Manifest.Permission_group.Screenlock,
                     Manifest.Permission_group.HardwareControls,
+                    Manifest.Permission_group.Storage,
                     Manifest.Permission.WakeLock,
                     
-                }, 1);
+                }, 0);
                 
-            }
+            
             
         }
     }

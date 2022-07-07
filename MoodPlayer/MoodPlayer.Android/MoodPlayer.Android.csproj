@@ -91,7 +91,7 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2401</Version>
+      <Version>5.0.0.2478</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +123,10 @@
     <ProjectReference Include="..\..\..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj">
       <Project>{3bfa2d88-a557-403b-a52e-5dab37fff2a9}</Project>
       <Name>DisplayAlertManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DependencyManager\DependencyManager.csproj">
+      <Project>{8c7eb303-db24-489b-87d9-77968501132c}</Project>
+      <Name>DependencyManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\MoodPlayer\MoodPlayer.csproj">
       <Project>{AC9B809E-21B4-46A9-BCF1-CF06B6F0C23F}</Project>

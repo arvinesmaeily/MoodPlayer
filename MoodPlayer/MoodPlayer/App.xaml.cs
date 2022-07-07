@@ -1,7 +1,7 @@
 ﻿
 using APIManager.Account;
 using APIManager.Account.Models.Responses;
-using DataCollectionManager.DependencyServices;
+using DependencyManager;
 using DataCollectionManager.MasterDataManager;
 using MoodPlayer.ViewNavigation;
 using MoodPlayer.Views;
@@ -35,14 +35,14 @@ namespace MoodPlayer
             APIManager.Resources.user_token = AppSettings.AccountSettings.ClientToken;
             if (AppSettings.AccountSettings.ClientAuthorized == true)
             {
-                TokenValidationResponse tokenValidationResponse = AccountManager.TokenValidation().Result;
+                TokenValidationResponse tokenValidationResponse = AccountManager.TokenValidation();
                 if (tokenValidationResponse.Code == "200")
                 {
                     NavigationManager.GotoMain();
                     DependencyService.Get<IScreenManager>().KeepOn();
 
                     Player.Initialize();
-                    Library.Load();
+
                 }
                 else
                 {

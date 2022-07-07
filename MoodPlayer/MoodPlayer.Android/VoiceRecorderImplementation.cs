@@ -1,5 +1,5 @@
 ﻿using Android.Media;
-using DataCollectionManager.DependencyServices;
+using DependencyManager;
 using DataCollectionManager.Voice.VoiceDataUtils;
 using DataCollectionManager.Voice.VoiceUtils;
 using MoodPlayer.Droid;

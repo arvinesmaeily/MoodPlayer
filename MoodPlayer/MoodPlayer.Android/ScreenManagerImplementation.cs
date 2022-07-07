@@ -1,5 +1,5 @@
 ﻿using Android.Views;
-using DataCollectionManager.DependencyServices;
+using DependencyManager;
 using MoodPlayer.Droid;
 using System;
 using Xamarin.Forms;
