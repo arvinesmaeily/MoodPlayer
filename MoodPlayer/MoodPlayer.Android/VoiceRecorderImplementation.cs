@@ -13,7 +13,20 @@ namespace MoodPlayer.Droid
 {
     public class VoiceRecorderImplementation : IVoiceRecorder
     {
+        public void Start()
+        {
+            
+        }
 
+        public void Stop()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+
+/*
         public const int sampleRate = 44100;
         public const int ArrayLength = 1000;
         public const ChannelIn channelIn = ChannelIn.Mono;
@@ -82,6 +95,4 @@ namespace MoodPlayer.Droid
                     IsRecording = false;
                 }
             });
-        }
-    }
-}
+        }*/
