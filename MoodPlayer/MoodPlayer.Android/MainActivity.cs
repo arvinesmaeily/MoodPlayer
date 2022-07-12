@@ -29,7 +29,7 @@ namespace MoodPlayer.Droid
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
             
             LoadApplication(new App());
-
+            
             RequirePermissions();
 
         }

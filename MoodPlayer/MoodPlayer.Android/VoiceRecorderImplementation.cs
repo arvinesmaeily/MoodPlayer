@@ -13,14 +13,25 @@ namespace MoodPlayer.Droid
 {
     public class VoiceRecorderImplementation : IVoiceRecorder
     {
+        [Obsolete]
+        MediaRecorder recorder = new MediaRecorder();
+
         public void Start()
         {
-            
+
+            recorder.SetAudioSource(AudioSource.Default);
+            recorder.SetOutputFormat(OutputFormat.AacAdts);
+            recorder.SetAudioEncoder(AudioEncoder.Aac);
+            recorder.SetOutputFile(VoiceController.RecordPath);
+            recorder.Prepare();
+            recorder.Start();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            recorder.Stop();
+            recorder.Reset();
+            recorder.Release();
         }
     }
 }
