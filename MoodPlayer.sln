@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsManager", "..\Setti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicPlayer", "..\MusicPlayer-MoodPlayer\MusicPlayer\MusicPlayer.csproj", "{953061F6-46F6-4937-812C-294C40CF28AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyManager", "DependencyManager\DependencyManager.csproj", "{8C7EB303-DB24-489B-87D9-77968501132C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyManager", "DependencyManager\DependencyManager.csproj", "{8C7EB303-DB24-489B-87D9-77968501132C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

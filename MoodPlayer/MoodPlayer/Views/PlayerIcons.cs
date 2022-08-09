@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MoodPlayer.Views
 {
     public class PlayerIcons : INotifyPropertyChanged
     {
-        private string _ShuffleIcon { get; set; }
-        private string _RepeatIcon { get; set; }
-        private string _PlayIcon { get; set; }
+        private UriImageSource _ShuffleIcon { get; set; }
+        private UriImageSource _RepeatIcon { get; set; }
+        private UriImageSource _PlayIcon { get; set; }
 
-        public string ShuffleIcon
+        public UriImageSource ShuffleIcon
         {
             get
             {
@@ -24,7 +25,7 @@ namespace MoodPlayer.Views
                 OnPropertyChanged(nameof(ShuffleIcon));
             }
         }
-        public string RepeatIcon
+        public UriImageSource RepeatIcon
         {
             get
             {
@@ -37,7 +38,7 @@ namespace MoodPlayer.Views
                 OnPropertyChanged(nameof(RepeatIcon));
             }
         }
-        public string PlayIcon
+        public UriImageSource PlayIcon
         {
             get
             {

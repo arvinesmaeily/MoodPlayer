@@ -12,7 +12,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Image>
                                     <Image.Source>
-                                        <UriImageSource Uri="{Binding Path=ImageUri}"/>
+                                        <UriImageSource Uri="{Binding Path=ImageUri}"  CachingEnabled="True" CacheValidity="7"/>
                                     </Image.Source>
                                 </Image>
                                 <StackLayout Orientation="Vertical">

@@ -18,18 +18,18 @@ namespace MoodPlayer.Views
         public LibraryPage()
         {
             InitializeComponent();
-
-        }
-
-        override protected void OnAppearing()
-        {
-
             Device.BeginInvokeOnMainThread(() =>
             {
                 DisplayAlertManager.AlertPresenter.PresentToast("Loading List...", Int32.MaxValue);
                 Library.Load();
                 DisplayAlertManager.AlertPresenter.PresentToast("List Loaded Successfully!", Int32.MaxValue);
             });
+        }
+
+        override protected void OnAppearing()
+        {
+
+
         }
     }
 }

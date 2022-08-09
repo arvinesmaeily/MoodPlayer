@@ -1,8 +1,11 @@
-﻿namespace DependencyManager
+﻿using System;
+
+namespace DependencyManager
 {
     public interface IVoiceRecorder
     {
-        void Start();
-        void Stop();
+        void Initialize(string initialRecordPath, TimeSpan timeout);
+        void TurnOn();
+        void TurnOff();
     }
 }

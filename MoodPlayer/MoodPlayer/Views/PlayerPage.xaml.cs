@@ -40,8 +40,14 @@ namespace MoodPlayer.Views
             
             Player.MediaPlayer.PositionChanged += PlayerPage_PositionChanged;
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
-            InitializeButtons();
 
+
+
+        }
+        override protected void OnAppearing()
+        {
+            InitializeButtons();
+            RenderColors();
         }
 
         private void CurrentReadingRecord_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -68,11 +74,17 @@ namespace MoodPlayer.Views
             //playback mode
             if (Player.PlayerSettings.IsPlaying)
             {
-                PlayerIcons.PlayIcon = "https://i.postimg.cc/wvnXd4My/Icon-Pause.png";
+                PlayerIcons.PlayIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/wvnXd4My/Icon-Pause.png"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(300, 0, 0, 0)
+                };
             }
             else if (!(Player.PlayerSettings.IsPlaying))
             {
-                PlayerIcons.PlayIcon = "https://i.postimg.cc/44hv1G2z/IconPlay.png";
+                PlayerIcons.PlayIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/44hv1G2z/IconPlay.png"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(300, 0, 0, 0)
+                };
             }
         }
 
@@ -82,17 +94,26 @@ namespace MoodPlayer.Views
             if (e.RepeatMode == RepeatMode.All)
             {
                 Player.PlayerSettings.Repeat = RepeatMode.All.ToString();
-                PlayerIcons.RepeatIcon = "https://i.postimg.cc/SN6WwrhR/Icon-Repeat-All.png";
+                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/SN6WwrhR/Icon-Repeat-All.png"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(300, 0, 0, 0)
+                };
             }
             else if (e.RepeatMode == RepeatMode.One)
             {
                 Player.PlayerSettings.Repeat = RepeatMode.One.ToString();
-                PlayerIcons.RepeatIcon = "https://i.postimg.cc/bwL1vwdj/Icon-Repeat-One.png";
+                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/bwL1vwdj/Icon-Repeat-One.png"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(300, 0, 0, 0)
+                };
             }
             else if (e.RepeatMode == RepeatMode.Off)
             {
                 Player.PlayerSettings.Repeat = RepeatMode.Off.ToString();
-                PlayerIcons.RepeatIcon = "https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png";
+                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(300, 0, 0, 0)
+                };
             }
         }
 
@@ -102,12 +123,14 @@ namespace MoodPlayer.Views
             if (e.ShuffleMode == ShuffleMode.All)
             {
                 Player.PlayerSettings.Shuffle = ShuffleMode.All.ToString();
-                PlayerIcons.ShuffleIcon = "https://i.postimg.cc/FKBcjCjW/Icon-Shuffle-On.png";
+                PlayerIcons.ShuffleIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/FKBcjCjW/Icon-Shuffle-On.png"),
+                    CachingEnabled = true, CacheValidity = new TimeSpan(300,0,0,0) };
             }
             else if (e.ShuffleMode == ShuffleMode.Off)
             {
                 Player.PlayerSettings.Shuffle = ShuffleMode.Off.ToString();
-                PlayerIcons.ShuffleIcon = "https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png";
+                PlayerIcons.ShuffleIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png"),
+                    CachingEnabled = true, CacheValidity = new TimeSpan(300, 0, 0, 0) };
             }
         }
 
@@ -166,6 +189,31 @@ namespace MoodPlayer.Views
             if (Player.MediaPlayer.Queue.Count > 0)
             {
                 Player.ChangeRepeat();
+            }
+        }
+
+        private void buttonRecord_Clicked(object sender, EventArgs e)
+        {
+            if (AppSettings.DataCollectionSettings.CollectVoice == true)
+            {
+                AppSettings.DataCollectionSettings.CollectVoice = false;
+            }
+            else
+            {
+                AppSettings.DataCollectionSettings.CollectVoice = true;
+            }
+            RenderColors();
+        }
+        
+        private void RenderColors()
+        {
+            if (AppSettings.DataCollectionSettings.CollectVoice)
+            {
+                buttonRecord.BackgroundColor = Color.Red;
+            }
+            else
+            {
+                buttonRecord.BackgroundColor = Color.DarkGray;
             }
         }
     }
