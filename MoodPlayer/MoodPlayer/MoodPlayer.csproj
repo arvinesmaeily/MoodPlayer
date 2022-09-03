@@ -66,7 +66,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\APIManager-MoodPlayer\APIManager\APIManager.csproj" />
     <ProjectReference Include="..\..\..\DataCollectionManager-MoodPlayer\DataCollectionManager\DataCollectionManager.csproj" />
-    <ProjectReference Include="..\..\..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj" />
     <ProjectReference Include="..\..\..\MusicPlayer-MoodPlayer\MusicPlayer\MusicPlayer.csproj" />
     <ProjectReference Include="..\..\..\SettingsManager-MoodPlayer\SettingsManager\SettingsManager.csproj" />
   </ItemGroup>

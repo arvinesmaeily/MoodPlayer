@@ -100,7 +100,6 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManagerImplementation.cs" />
-    <Compile Include="VoiceRecorderImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -119,10 +118,6 @@
     <ProjectReference Include="..\..\..\DataCollectionManager-MoodPlayer\DataCollectionManager\DataCollectionManager.csproj">
       <Project>{085360cb-3c66-413b-8ece-0f42275207b4}</Project>
       <Name>DataCollectionManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj">
-      <Project>{3bfa2d88-a557-403b-a52e-5dab37fff2a9}</Project>
-      <Name>DisplayAlertManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DependencyManager\DependencyManager.csproj">
       <Project>{8c7eb303-db24-489b-87d9-77968501132c}</Project>

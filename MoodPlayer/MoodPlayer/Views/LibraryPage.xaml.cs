@@ -20,9 +20,7 @@ namespace MoodPlayer.Views
             InitializeComponent();
             Device.BeginInvokeOnMainThread(() =>
             {
-                DisplayAlertManager.AlertPresenter.PresentToast("Loading List...", Int32.MaxValue);
                 Library.Load();
-                DisplayAlertManager.AlertPresenter.PresentToast("List Loaded Successfully!", Int32.MaxValue);
             });
         }
 

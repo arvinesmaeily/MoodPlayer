@@ -1,16 +1,21 @@
-﻿using APIManager.Account;
+﻿using APIManager;
+using APIManager.Account;
+using APIManager.Account.Models.Requests;
 using APIManager.Account.Models.Responses;
 using MoodPlayer.Extensions;
 using MoodPlayer.ViewNavigation;
 using SettingsManager;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static SQLite.SQLite3;
 
 namespace MoodPlayer.Views.LoginContent
 {
@@ -42,21 +47,22 @@ namespace MoodPlayer.Views.LoginContent
                     //}
                     //else
                     //{
-                    LoginUsernameResponse result = AccountManager.UsernameLogin(entryUsername.Text, entryPassword.Text).Result;
-                    if (result.code != "200")
+                    LoginUsernameRequest request = new LoginUsernameRequest() { Username = entryUsername.Text, Password = entryPassword.Text };
+                    Response<LoginUsernameResponse> result = AccountManager.UsernameLogin(request);
+                    Debug.WriteLine(result.Content.Token);
+                    if (result.StatusCode != HttpStatusCode.OK)
                     {
-                        DisplayAlert("Login Error", result.error, "Okay");
+                        DisplayAlert("Login Error", result.Content.Error, "Okay");
                         //captcha.Generate();
                     }
                     else
                     {
+                        var Token = "Token " + result.Content.Token;
                         AppSettings.AccountSettings.ClientAuthorized = true;
-                        AppSettings.AccountSettings.ClientToken = result.data.user.accessTokens[result.data.user.accessTokens.Length - 1];
+                        AppSettings.AccountSettings.ClientToken = Token;
+                        AppSettings.AccountInfo.ID = result.Content.UserId;
 
-                        AppSettings.AccountInfo.ID = result.data.user.id;
-                        AppSettings.AccountInfo.Username = result.data.user.username;
-                        AppSettings.AccountInfo.Email = result.data.user.email;
-                        AppSettings.AccountInfo.LastLogin = result.data.user.lastLogin;
+                        APIManager.Resources.Authorization = Token;
                         //captcha.Generate();
                         NavigationManager.GotoMain();
                     }

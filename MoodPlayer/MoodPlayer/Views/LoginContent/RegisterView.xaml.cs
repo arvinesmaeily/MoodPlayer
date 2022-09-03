@@ -1,9 +1,12 @@
-﻿using APIManager.Account;
+﻿using APIManager;
+using APIManager.Account;
+using APIManager.Account.Models.Requests;
 using APIManager.Account.Models.Responses;
 using MoodPlayer.Extensions;
 using MoodPlayer.ViewNavigation;
 using SettingsManager;
 using System;
+using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -46,32 +49,37 @@ namespace MoodPlayer.Views.LoginContent
                     }
                     else
                     {
-                        SignupResponse result = AccountManager.SignUp(entryUsername.Text, entryEmail.Text, entryPassword.Text).Result;
-                        if (result.code != "200")
+                        var request = new SignupRequest() { Username= entryUsername.Text, Email = entryEmail.Text, Password = entryPassword.Text };
+                        Response<SignupResponse> result = AccountManager.SignUp(request);
+
+                        if (result.StatusCode != HttpStatusCode.OK)
                         {
-                            DisplayAlert("Signup Error", result.error, "Okay");
+                            DisplayAlert("Signup Error", result.Content.Error, "Okay");
                             captcha.Generate();
                         }
                         else
                         {
                             DisplayAlert("Successful Registration!", "Your account has been created successfully!", "Okay");
                             captcha.Generate();
-                            LoginUsernameResponse result2 = AccountManager.UsernameLogin(entryUsername.Text, entryPassword.Text).Result;
-                            if (result2.code != "200")
+
+                            var request2 = new LoginUsernameRequest() { Username = entryUsername.Text, Password = entryPassword.Text };
+                            Response<LoginUsernameResponse> result2 = AccountManager.UsernameLogin(request2);
+
+                            if (result2.StatusCode != HttpStatusCode.OK)
                             {
-                                DisplayAlert("Login Error", result2.error, "Okay");
+                                DisplayAlert("Login Error", result2.Content.Error, "Okay");
                                 DisplayAlert("Manual Login", "Please login manually.", "Okay");
                                 captcha.Generate();
                             }
                             else
                             {
+                                var Token = "Token " + result2.Content.Token;
                                 AppSettings.AccountSettings.ClientAuthorized = true;
-                                AppSettings.AccountSettings.ClientToken = result2.data.user.accessTokens[result2.data.user.accessTokens.Length - 1];
-
-                                AppSettings.AccountInfo.ID = result2.data.user.id;
-                                AppSettings.AccountInfo.Username = result2.data.user.username;
-                                AppSettings.AccountInfo.Email = result2.data.user.email;
-                                AppSettings.AccountInfo.LastLogin = result2.data.user.lastLogin;
+                                AppSettings.AccountSettings.ClientToken = Token;
+                                AppSettings.AccountInfo.ID = result2.Content.UserId;
+                                
+                                APIManager.Resources.Authorization = Token;
+                                //captcha.Generate();
                                 NavigationManager.GotoMain();
                             }
                         }

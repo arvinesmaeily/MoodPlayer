@@ -153,10 +153,6 @@
       <Project>{085360cb-3c66-413b-8ece-0f42275207b4}</Project>
       <Name>DataCollectionManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DisplayAlertManager-MoodPlayer\DisplayAlertManager\DisplayAlertManager.csproj">
-      <Project>{3bfa2d88-a557-403b-a52e-5dab37fff2a9}</Project>
-      <Name>DisplayAlertManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MoodPlayer\MoodPlayer.csproj">
       <Project>{AC9B809E-21B4-46A9-BCF1-CF06B6F0C23F}</Project>
       <Name>MoodPlayer</Name>

@@ -13,6 +13,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using APIManager.Music.Models.Responses;
+using APIManager;
+using System.Net;
 
 namespace MoodPlayer
 {
@@ -30,30 +33,33 @@ namespace MoodPlayer
             //Player.Current.SetQueue(Library.Data);
         }
 
-        private static void CheckCredentials()
+        private static string CheckCredentials()
         {
-            APIManager.Resources.user_token = AppSettings.AccountSettings.ClientToken;
+            APIManager.Resources.Authorization = AppSettings.AccountSettings.ClientToken;
             if (AppSettings.AccountSettings.ClientAuthorized == true)
             {
-                TokenValidationResponse tokenValidationResponse = AccountManager.TokenValidation();
-                if (tokenValidationResponse.Code == "200")
+                Response<RetrieveMusicListResponse> tokenValidationResponse = APIManager.Music.MusicManager.RetrieveMusicList();
+                if (tokenValidationResponse.StatusCode == HttpStatusCode.OK)
                 {
                     NavigationManager.GotoMain();
                     DependencyService.Get<IScreenManager>().KeepOn();
 
                     Player.Initialize();
 
+                    return "Valid Credenials";
+
                 }
                 else
                 {
                     NavigationManager.GotoLogin();
-                    DisplayAlertManager.AlertPresenter.PresentToast("Authorization Failed" + "\nError Code: " + tokenValidationResponse.Code + "\n Error Message: " + tokenValidationResponse.Error, Int32.MaxValue);
+                    return "Authorization Failed" + "\nError Code: " + tokenValidationResponse.StatusCode + "\n Error Message: " + tokenValidationResponse.Content.Error;
 
                 }
             }
             else
             {
                 NavigationManager.GotoLogin();
+                return "Please login again.";
             }
         }
         public static void SetRecordTransmit(string action)

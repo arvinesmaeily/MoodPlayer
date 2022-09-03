@@ -1,7 +1,5 @@
 ﻿using DependencyManager;
 using DataCollectionManager.MasterDataManager;
-using DataCollectionManager.Voice.VoiceUtils;
-using DisplayAlertManager.Dialogs;
 using MediaManager.Playback;
 using MediaManager.Player;
 using MediaManager.Queue;
@@ -54,7 +52,6 @@ namespace MoodPlayer.Views
         {
             labelMusicRecordQueueCount.Text = DataCollectionManager.Music.MusicDataUtils.MusicRecordManager.Records.Count.ToString();
             labelSensorRecordQueueCount.Text = DataCollectionManager.SmartphoneSensors.SPSensorDataUtils.SPSensorRecordManager.Records.Count.ToString();
-            labelVoiceRecordQueueCount.Text = DataCollectionManager.Voice.VoiceDataUtils.VoiceRecordManager.Records.Count.ToString();
         }
 
         private void InitializeButtons()
