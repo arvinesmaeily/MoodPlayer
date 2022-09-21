@@ -12,7 +12,7 @@ namespace MoodPlayer.Extensions
     {
         public string Source { get; set; }
 
-        [MTAThread]
+
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Source == null)

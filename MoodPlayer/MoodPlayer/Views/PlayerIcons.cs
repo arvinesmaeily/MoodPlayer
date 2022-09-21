@@ -8,11 +8,11 @@ namespace MoodPlayer.Views
 {
     public class PlayerIcons : INotifyPropertyChanged
     {
-        private UriImageSource _ShuffleIcon { get; set; }
-        private UriImageSource _RepeatIcon { get; set; }
-        private UriImageSource _PlayIcon { get; set; }
+        private FileImageSource _ShuffleIcon { get; set; }
+        private FileImageSource _RepeatIcon { get; set; }
+        private FileImageSource _PlayIcon { get; set; }
 
-        public UriImageSource ShuffleIcon
+        public FileImageSource ShuffleIcon
         {
             get
             {
@@ -25,7 +25,7 @@ namespace MoodPlayer.Views
                 OnPropertyChanged(nameof(ShuffleIcon));
             }
         }
-        public UriImageSource RepeatIcon
+        public FileImageSource RepeatIcon
         {
             get
             {
@@ -38,7 +38,7 @@ namespace MoodPlayer.Views
                 OnPropertyChanged(nameof(RepeatIcon));
             }
         }
-        public UriImageSource PlayIcon
+        public FileImageSource PlayIcon
         {
             get
             {
@@ -55,12 +55,12 @@ namespace MoodPlayer.Views
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-        [MTAThread]
+
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
-        [MTAThread]
+
         protected void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));

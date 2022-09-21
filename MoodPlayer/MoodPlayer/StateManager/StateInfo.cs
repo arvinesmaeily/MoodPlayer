@@ -42,7 +42,7 @@ namespace MoodPlayer.StateManager
         }
 
         #region ShallowCopy     
-        [MTAThread]
+
         public StateInfo ShallowCopy()
         {
             return (StateInfo)MemberwiseClone();

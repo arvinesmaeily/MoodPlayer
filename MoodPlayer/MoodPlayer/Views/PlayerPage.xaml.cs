@@ -34,114 +34,127 @@ namespace MoodPlayer.Views
             buttonPlay.BindingContext = this.PlayerIcons;
             buttonRepeat.BindingContext = this.PlayerIcons;
 
-            DataCollectionManager.Music.MusicDataUtils.MusicRecordManager.CurrentReadingRecord.PropertyChanged += CurrentReadingRecord_PropertyChanged;
-            
             Player.MediaPlayer.PositionChanged += PlayerPage_PositionChanged;
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
-
-
 
         }
         override protected void OnAppearing()
         {
             InitializeButtons();
-            RenderColors();
-        }
-
-        private void CurrentReadingRecord_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            labelMusicRecordQueueCount.Text = DataCollectionManager.Music.MusicDataUtils.MusicRecordManager.Records.Count.ToString();
-            labelSensorRecordQueueCount.Text = DataCollectionManager.SmartphoneSensors.SPSensorDataUtils.SPSensorRecordManager.Records.Count.ToString();
         }
 
         private void InitializeButtons()
         {
-            Player.MediaQueue.ShuffleModeChanged += MediaQueue_ShuffleModeChanged;
-            Player.MediaQueue.RepeatModeChanged += MediaQueue_RepeatModeChanged;
-            Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
-            PlayerSettings_PropertyChanged(null, null);
-            RepeatModeChangedEventArgs repeatModeChangedEventArgs = new RepeatModeChangedEventArgs() { RepeatMode = Player.MediaQueue.RepeatMode };
-            ShuffleModeChangedEventArgs shuffleModeChangedEventArgs = new ShuffleModeChangedEventArgs() { ShuffleMode = Player.MediaQueue.ShuffleMode };
-            MediaQueue_RepeatModeChanged(null, repeatModeChangedEventArgs);
-            MediaQueue_ShuffleModeChanged(null, shuffleModeChangedEventArgs);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Player.MediaQueue.ShuffleModeChanged += MediaQueue_ShuffleModeChanged;
+                Player.MediaQueue.RepeatModeChanged += MediaQueue_RepeatModeChanged;
+                Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
+                PlayerSettings_PropertyChanged(null, null);
+                RepeatModeChangedEventArgs repeatModeChangedEventArgs = new RepeatModeChangedEventArgs() { RepeatMode = Player.MediaQueue.RepeatMode };
+                ShuffleModeChangedEventArgs shuffleModeChangedEventArgs = new ShuffleModeChangedEventArgs() { ShuffleMode = Player.MediaQueue.ShuffleMode };
+                MediaQueue_RepeatModeChanged(null, repeatModeChangedEventArgs);
+                MediaQueue_ShuffleModeChanged(null, shuffleModeChangedEventArgs);
+            });
         }
 
         private void PlayerSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //playback mode
-            if (Player.PlayerSettings.IsPlaying)
+
+            Device.BeginInvokeOnMainThread(() =>
             {
-                PlayerIcons.PlayIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/wvnXd4My/Icon-Pause.png"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(300, 0, 0, 0)
-                };
-            }
-            else if (!(Player.PlayerSettings.IsPlaying))
-            {
-                PlayerIcons.PlayIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/44hv1G2z/IconPlay.png"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(300, 0, 0, 0)
-                };
-            }
+                //playback mode
+                if (Player.PlayerSettings.IsPlaying)
+                {
+                    PlayerIcons.PlayIcon = new FileImageSource()
+                    {
+                        File = "iconpause.png"
+                    };
+                }
+                else if (!(Player.PlayerSettings.IsPlaying))
+                {
+                    PlayerIcons.PlayIcon = new FileImageSource()
+                    {
+                        File = "iconplay.png"
+                    };
+                }
+            });
         }
 
         private void MediaQueue_RepeatModeChanged(object sender, RepeatModeChangedEventArgs e)
         {
-            //repeat settings
-            if (e.RepeatMode == RepeatMode.All)
+
+            Device.BeginInvokeOnMainThread(() =>
             {
-                Player.PlayerSettings.Repeat = RepeatMode.All.ToString();
-                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/SN6WwrhR/Icon-Repeat-All.png"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(300, 0, 0, 0)
-                };
-            }
-            else if (e.RepeatMode == RepeatMode.One)
-            {
-                Player.PlayerSettings.Repeat = RepeatMode.One.ToString();
-                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/bwL1vwdj/Icon-Repeat-One.png"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(300, 0, 0, 0)
-                };
-            }
-            else if (e.RepeatMode == RepeatMode.Off)
-            {
-                Player.PlayerSettings.Repeat = RepeatMode.Off.ToString();
-                PlayerIcons.RepeatIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/zGqn5gzj/Icon-Repeat-Off.png"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(300, 0, 0, 0)
-                };
-            }
+                //repeat settings
+                if (e.RepeatMode == RepeatMode.All)
+                {
+                    Player.PlayerSettings.Repeat = RepeatMode.All.ToString();
+                    PlayerIcons.RepeatIcon = new FileImageSource()
+                    {
+                        File = "iconrepeatall.png"
+                    };
+                }
+                else if (e.RepeatMode == RepeatMode.One)
+                {
+                    Player.PlayerSettings.Repeat = RepeatMode.One.ToString();
+                    PlayerIcons.RepeatIcon = new FileImageSource()
+                    {
+                        File = "iconrepeatone.png"
+                    };
+                }
+                else if (e.RepeatMode == RepeatMode.Off)
+                {
+                    Player.PlayerSettings.Repeat = RepeatMode.Off.ToString();
+                    PlayerIcons.RepeatIcon = new FileImageSource()
+                    {
+                        File = "iconrepeatoff.png"
+                    };
+                }
+            });
         }
 
         private void MediaQueue_ShuffleModeChanged(object sender, ShuffleModeChangedEventArgs e)
         {
-            //shuffle settings
-            if (e.ShuffleMode == ShuffleMode.All)
+
+            Device.BeginInvokeOnMainThread(() =>
             {
-                Player.PlayerSettings.Shuffle = ShuffleMode.All.ToString();
-                PlayerIcons.ShuffleIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/FKBcjCjW/Icon-Shuffle-On.png"),
-                    CachingEnabled = true, CacheValidity = new TimeSpan(300,0,0,0) };
-            }
-            else if (e.ShuffleMode == ShuffleMode.Off)
-            {
-                Player.PlayerSettings.Shuffle = ShuffleMode.Off.ToString();
-                PlayerIcons.ShuffleIcon = new UriImageSource() { Uri = new Uri("https://i.postimg.cc/W43gqcJq/Icon-Shuffle-Off.png"),
-                    CachingEnabled = true, CacheValidity = new TimeSpan(300, 0, 0, 0) };
-            }
+                //shuffle settings
+                if (e.ShuffleMode == ShuffleMode.All)
+                {
+                    Player.PlayerSettings.Shuffle = ShuffleMode.All.ToString();
+                    PlayerIcons.ShuffleIcon = new FileImageSource()
+                    {
+                        File = "iconshuffleon.png"
+                    };
+                }
+                else if (e.ShuffleMode == ShuffleMode.Off)
+                {
+                    Player.PlayerSettings.Shuffle = ShuffleMode.Off.ToString();
+                    PlayerIcons.ShuffleIcon = new FileImageSource()
+                    {
+                        File = "iconshuffleoff.png"
+                    };
+                }
+            });
         }
 
         private void MediaQueue_CurrentItemChanged(object sender, MusicPlayer.MusicUtil.CurrentItemChangedEventArgs e)
         {
-            labelSongArtist.Text = Player.MediaQueue.CurrentItem.Artist;
-            labelSongTitle.Text = Player.MediaQueue.CurrentItem.Title;
-            songImage.Source = ImageSource.FromUri(new Uri(Player.MediaQueue.CurrentItem.ImageUri));
-            labelDuration.Text = Player.MediaPlayer.Duration.ToString(@"mm\:ss");
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                labelSongArtist.Text = Player.MediaQueue.CurrentItem.Artist;
+                labelSongTitle.Text = Player.MediaQueue.CurrentItem.Title;
+                songImage.Source = ImageSource.FromUri(new Uri(Player.MediaQueue.CurrentItem.ImageUri));
+                labelDuration.Text = Player.MediaPlayer.Duration.ToString(@"mm\:ss");
+            });
         }
 
         private void PlayerPage_PositionChanged(object sender, MediaManager.Playback.PositionChangedEventArgs e)
         {
-            Device.InvokeOnMainThreadAsync((() =>
+
+            Device.BeginInvokeOnMainThread((() =>
             {
                 labelPosition.Text = e.Position.ToString(@"mm\:ss");
                 sliderPosition.Value = (e.Position.TotalSeconds / Player.MediaPlayer.Duration.TotalSeconds);
@@ -151,15 +164,18 @@ namespace MoodPlayer.Views
 
         private void buttonPlay_Clicked(object sender, EventArgs e)
         {
-            if (Player.MediaPlayer.State != MediaPlayerState.Playing)
-            {
-                Player.Play();
-                App.SetRecordTransmit("start");
-            }
-            else
-                Player.Pause();
-            App.SetRecordTransmit("stop");
 
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                if (Player.MediaPlayer.State != MediaPlayerState.Playing)
+                {
+                    Player.Play();
+                    App.SetRecordTransmit("start");
+                }
+                else
+                    Player.Pause();
+                App.SetRecordTransmit("stop");
+            });
         }
 
         private void buttonPrev_Clicked(object sender, EventArgs e)
@@ -204,14 +220,7 @@ namespace MoodPlayer.Views
         
         private void RenderColors()
         {
-            if (AppSettings.DataCollectionSettings.CollectVoice)
-            {
-                buttonRecord.BackgroundColor = Color.Red;
-            }
-            else
-            {
-                buttonRecord.BackgroundColor = Color.DarkGray;
-            }
+
         }
     }
 

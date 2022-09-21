@@ -18,9 +18,6 @@ namespace MoodPlayer.Views
             InitializeComponent();
             
             id.BindingContext = AppSettings.AccountInfo;
-            username.BindingContext = AppSettings.AccountInfo;
-            email.BindingContext = AppSettings.AccountInfo;
-            lastLogin.BindingContext = AppSettings.AccountInfo;
 
             //stateSpotify.BindingContext = AppSettings.AccountSettings;
             //spotifyToken.BindingContext = AppSettings.AccountSettings;
@@ -28,9 +25,34 @@ namespace MoodPlayer.Views
 
         private void buttonLogout_Clicked(object sender, EventArgs e)
         {
-            AppSettings.AccountInfo.Clear();
-            AppSettings.AccountSettings.Clear();
-            NavigationManager.GotoLogin();
+            try
+            {
+
+
+                var response = APIManager.Account.AccountManager.Logout();
+                if (response != null)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        DisplayAlert("Log Out Successful!", "Successfully logged out from your account.", "Done");
+                        AppSettings.AccountInfo.Clear();
+                        AppSettings.AccountSettings.Clear();
+                        NavigationManager.GotoLogin();
+                    }
+                    else
+                    {
+                        DisplayAlert("Error", "Code: " + response.StatusCode + "\nMessage: " + response.Content.Error, "Done");
+                    }
+                }
+                else
+                {
+                    DisplayAlert("Error", "No Response Reecieved.", "Done");
+                }
+            }
+            catch(Exception ex)
+            {
+                DisplayAlert("Error", ex.Message, "Done");
+            }
         }
     }
 }

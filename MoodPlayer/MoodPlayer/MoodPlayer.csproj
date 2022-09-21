@@ -13,17 +13,6 @@
     <None Remove="Resources\IconSpotify.png" />
     <None Remove="Resources\IconUser.png" />
     <None Remove="Resources\Library\IconMusicAlbum.png" />
-    <None Remove="Resources\Playback\IconFavoriteFalse.png" />
-    <None Remove="Resources\Playback\IconFavoriteTrue.png" />
-    <None Remove="Resources\Playback\IconNext.png" />
-    <None Remove="Resources\Playback\IconPause.png" />
-    <None Remove="Resources\Playback\IconPlay.png" />
-    <None Remove="Resources\Playback\IconPrev.png" />
-    <None Remove="Resources\Playback\IconRepeatAll.png" />
-    <None Remove="Resources\Playback\IconRepeatOff.png" />
-    <None Remove="Resources\Playback\IconRepeatOne.png" />
-    <None Remove="Resources\Playback\IconShuffleOff.png" />
-    <None Remove="Resources\Playback\IconShuffleOn.png" />
     <None Remove="Resources\UI\IconAutopilot.png" />
     <None Remove="Resources\UI\IconLearning.png" />
     <None Remove="Resources\UI\IconLibrary.png" />
@@ -31,17 +20,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icon.png" />
-    <EmbeddedResource Include="Resources\Playback\IconFavoriteFalse.png" />
-    <EmbeddedResource Include="Resources\Playback\IconFavoriteTrue.png" />
-    <EmbeddedResource Include="Resources\Playback\IconNext.png" />
-    <EmbeddedResource Include="Resources\Playback\IconPause.png" />
-    <EmbeddedResource Include="Resources\Playback\IconPlay.png" />
-    <EmbeddedResource Include="Resources\Playback\IconPrev.png" />
-    <EmbeddedResource Include="Resources\Playback\IconRepeatAll.png" />
-    <EmbeddedResource Include="Resources\Playback\IconRepeatOff.png" />
-    <EmbeddedResource Include="Resources\Playback\IconRepeatOne.png" />
-    <EmbeddedResource Include="Resources\Playback\IconShuffleOff.png" />
-    <EmbeddedResource Include="Resources\Playback\IconShuffleOn.png" />
     <Resource Include="Resources\Library\IconMusicAlbum.png" />
     <EmbeddedResource Include="Resources\UI\IconAudioWave.png" />
     <EmbeddedResource Include="Resources\UI\IconAutopilot.png" />

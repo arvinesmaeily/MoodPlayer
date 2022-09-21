@@ -9,7 +9,7 @@ namespace MoodPlayer.Droid
 {
     class ScreenManagerImplementation : IScreenManager
     {
-        [MTAThread]
+
         public void KeepOn()
         {
             MainActivity mainActivity = MainActivity.Instance;

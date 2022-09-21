@@ -28,7 +28,7 @@ namespace MoodPlayer.Extensions
 
         public void Generate() { Term = Bickers.Twaddle.Core.Twaddle.Word.GenerateWord(); }
 
-        [MTAThread]
+
         public Captcha ShallowCopy()
         {
             return (Captcha)MemberwiseClone();
@@ -36,12 +36,12 @@ namespace MoodPlayer.Extensions
 
         // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
-        [MTAThread]
+
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
-        [MTAThread]
+
         protected void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));

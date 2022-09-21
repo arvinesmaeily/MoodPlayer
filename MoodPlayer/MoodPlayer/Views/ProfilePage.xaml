@@ -24,7 +24,7 @@
                 <Label Text="ID: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
                 <Label x:Name="id" Text="{Binding Path=ID}"/>
             </StackLayout>
-            
+            <!--
             <StackLayout Orientation="Horizontal">
                 <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
                 <Label x:Name="username" Text="{Binding Path=Username}"/>
@@ -39,7 +39,7 @@
                 <Label Text="Last Login: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
                 <Label x:Name="lastLogin" Text="{Binding Path=LastLogin}"/>
             </StackLayout>
-            <!--
+            
             <Frame></Frame>
             <Label Text="Spotify" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
             
