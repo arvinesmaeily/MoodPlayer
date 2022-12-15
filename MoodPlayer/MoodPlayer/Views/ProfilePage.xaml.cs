@@ -34,24 +34,24 @@ namespace MoodPlayer.Views
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        DisplayAlert("Log Out Successful!", "Successfully logged out from your account.", "Done");
+                        DisplayAlert("خروج موفقیت آمیز", "با موفقیت از حساب خود خارج شدید.", "بستن");
                         AppSettings.AccountInfo.Clear();
                         AppSettings.AccountSettings.Clear();
                         NavigationManager.GotoLogin();
                     }
                     else
                     {
-                        DisplayAlert("Error", "Code: " + response.StatusCode + "\nMessage: " + response.Content.Error, "Done");
+                        DisplayAlert("خطا", "Code: " + response.StatusCode + "\nMessage: " + response.Content.Error, "بستن");
                     }
                 }
                 else
                 {
-                    DisplayAlert("Error", "No Response Reecieved.", "Done");
+                    DisplayAlert("خطا", "No Response Reecieved.", "بستن");
                 }
             }
             catch(Exception ex)
             {
-                DisplayAlert("Error", ex.Message, "Done");
+                DisplayAlert("خطا", ex.Message, "بستن");
             }
         }
     }

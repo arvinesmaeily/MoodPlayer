@@ -5,7 +5,7 @@
     
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Account" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+            <Label Text="حساب کاربری" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
         </StackLayout>
     </Shell.TitleView>
     
@@ -13,34 +13,30 @@
         <StackLayout>
         <ScrollView>
         <StackLayout>
-            <Label Text="Register" FontSize="Large" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="{DynamicResource SecondaryDark}"/>
+            <Label Text="ایجاد حساب" FontSize="Large" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="{DynamicResource SecondaryDark}"/>
 
             <StackLayout Orientation="Vertical">
-                <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                <Entry x:Name="entryUsername" Placeholder="Username" HorizontalOptions="FillAndExpand"/>
+                <Entry x:Name="entryUsername" Placeholder="نام کاربری" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Vertical">
-                <Label Text="Email: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                <Entry x:Name="entryEmail" Placeholder="Email" HorizontalOptions="FillAndExpand"/>
+                <Entry x:Name="entryEmail" Placeholder="ایمیل" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
             <StackLayout Orientation="Vertical">
-                <Label Text="Password: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                <Entry x:Name="entryPassword" Placeholder="Password" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+                        <Entry x:Name="entryPassword" Placeholder="رمز عبور" HorizontalOptions="FillAndExpand" IsPassword="True"/>
             </StackLayout>
                 <StackLayout Orientation="Vertical">
-                    <Label Text="Re-Enter Password: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                    <Entry x:Name="entrySecondPassword" Placeholder="Re-Enter Password" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+                        <Entry x:Name="entrySecondPassword" Placeholder="تکرار رمز عبور" HorizontalOptions="FillAndExpand" IsPassword="True"/>
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Enter Captcha Word:" FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                        <Label Text="حروف را وارد کنید" FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
                         <Label x:Name="labelCaptcha" Text="{Binding Path=Term}" FontSize="Subtitle" TextColor="AliceBlue"/>
                     </StackLayout>
-                    <Entry x:Name="entryCaptcha" Placeholder="Enter Captcha Word" HorizontalOptions="FillAndExpand"/>
+                        <Entry x:Name="entryCaptcha" Placeholder="حروف را وارد کنید" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
-                <Button x:Name="buttonLogin" Clicked="buttonLogin_Clicked" Text="Register"/>
+                <Button x:Name="buttonLogin" Clicked="buttonLogin_Clicked" Text="ایجاد حساب"/>
         </StackLayout>
         </ScrollView>
         </StackLayout>

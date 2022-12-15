@@ -30,21 +30,21 @@ namespace MoodPlayer.Views.LoginContent
             {
                 if (entryUsername.Text.Length < 1 || entryEmail.Text.Length < 1 || entryPassword.Text.Length < 1 || entrySecondPassword.Text.Length < 1 || entryCaptcha.Text.Length < 1)
                 {
-                    DisplayAlert("Entry Field Error", "Please fill all the entry fields correctly.", "Okay");
+                    DisplayAlert("خطا در فیلد", "لطفا همه فیلد ها را پر کنید", "بستن");
                     captcha.Generate();
                 }
                 else
                 {
                     if (entryCaptcha.Text.ToLower() != captcha.Term.ToLower())
                     {
-                        DisplayAlert("Captcha Error", "Please enter the captcha term correctly. Captcha is not case sensitive.", "Okay");
+                        DisplayAlert("خطای Captcha", "عبارت امنیتی اشتباه وارد شده است. مجددا تلاش کنید.", "بستن");
                         captcha.Generate();
                     }
                     else if (entryPassword.Text != entrySecondPassword.Text)
                     {
                         entryPassword.Text = "";
                         entrySecondPassword.Text = "";
-                        DisplayAlert("Password Error", "Passwords do not match. Please enter passwords again.", "Okay");
+                        DisplayAlert("خطای رمز عبور", "رمز های عبور با یکدیگر مطابقت ندارند. مجددا رمز ها را وارد کنید.", "بستن");
                         captcha.Generate();
                     }
                     else
@@ -54,12 +54,12 @@ namespace MoodPlayer.Views.LoginContent
 
                         if (result.StatusCode != HttpStatusCode.OK)
                         {
-                            DisplayAlert("Signup Error", result.Content.Error, "Okay");
+                            DisplayAlert("خطای ساختن حساب", result.Content.Error, "بستن");
                             captcha.Generate();
                         }
                         else
                         {
-                            DisplayAlert("Successful Registration!", "Your account has been created successfully!", "Okay");
+                            DisplayAlert("ایجاد حساب موفقیت آمیز", "حساب شما با موفقیت ایجاد شد.", "بستن");
                             captcha.Generate();
 
                             var request2 = new LoginUsernameRequest() { Username = entryUsername.Text, Password = entryPassword.Text };
@@ -67,8 +67,8 @@ namespace MoodPlayer.Views.LoginContent
 
                             if (result2.StatusCode != HttpStatusCode.OK)
                             {
-                                DisplayAlert("Login Error", result2.Content.Error, "Okay");
-                                DisplayAlert("Manual Login", "Please login manually.", "Okay");
+                                DisplayAlert("خطای ورود به حساب", result2.Content.Error, "بستن");
+                                DisplayAlert("وارد شدن دستی", "ورود اتوماتیک موفقیت آمیز نبود. لطفا به صورت دستی وارد شوید.", "بستن");
                                 captcha.Generate();
                             }
                             else

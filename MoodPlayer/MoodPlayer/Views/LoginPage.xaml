@@ -24,11 +24,11 @@
     </Shell.Resources>
 
     <TabBar>
-        <Tab Title="Login">
-            <ShellContent x:Name="LoginUsernameContent" Title="Username" ContentTemplate="{DataTemplate contents:LoginUsernameView}"/>
-            <ShellContent x:Name="LoginEmailContent" Title="Email" ContentTemplate="{DataTemplate contents:LoginEmailView}"/>
+        <Tab Title="ورود">
+            <ShellContent x:Name="LoginUsernameContent" Title="نام کاربری" ContentTemplate="{DataTemplate contents:LoginUsernameView}"/>
+            <ShellContent x:Name="LoginEmailContent" Title="ایمیل" ContentTemplate="{DataTemplate contents:LoginEmailView}"/>
         </Tab>
-        <Tab Title="Register">
+        <Tab Title="ایجاد حساب">
             <ShellContent x:Name="RegisterContent" ContentTemplate="{DataTemplate contents:RegisterView}"/>
         </Tab>
     </TabBar>

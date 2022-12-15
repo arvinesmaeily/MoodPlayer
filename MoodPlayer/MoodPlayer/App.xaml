@@ -43,7 +43,8 @@
             
             <!--Entry Style-->
             <Style TargetType="Entry">
-                <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+                <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryDark}"/>
                 <Setter Property="Margin" Value="5"/>
             </Style>
             

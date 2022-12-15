@@ -7,6 +7,8 @@ using Android;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
 using Android.Content;
+using AiForms.Dialogs;
+using DataCollectionManager.MasterDataManager;
 
 namespace MoodPlayer.Droid
 {
@@ -16,21 +18,28 @@ namespace MoodPlayer.Droid
         public static MainActivity Instance { get; internal set; }
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            try
+            {
 
-            Instance = this;
-            base.OnCreate(savedInstanceState);
+
+                Instance = this;
+                base.OnCreate(savedInstanceState);
 
 
-            PrepareAlertManager();
-            PrepareMusicPlayer();
+                PrepareAlertManager();
+                PrepareMusicPlayer();
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Window.SetStatusBarColor(Android.Graphics.Color.Black);
-            
-            LoadApplication(new App());
-            RequirePermissions();
+                Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+                global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+                Window.SetStatusBarColor(Android.Graphics.Color.Black);
 
+                LoadApplication(new App());
+                RequirePermissions();
+            }
+            catch(Exception ex)
+            {
+                DataRecordingManager.Status.Message = ex.Message;
+            }
         }
 
         private void PrepareMusicPlayer()

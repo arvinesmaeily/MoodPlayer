@@ -27,9 +27,9 @@
     </Shell.Resources>
 
     <TabBar  CurrentItem="{x:Reference PlayerTab}">
-        <ShellContent x:Name="LibraryTab" Title="Library" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconLibrary.png}" Route="LibraryPage" ContentTemplate="{DataTemplate local:LibraryPage}"/>
-        <ShellContent x:Name="PlayerTab" Title="Player" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconAudioWave.png}" Route="PlayerPage" ContentTemplate="{DataTemplate local:PlayerPage}" />
-        <ShellContent x:Name="ProfileTab" Title="Profile" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconUser.png}" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
+        <ShellContent x:Name="LibraryTab" Title="آهنگ ها" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconLibrary.png}" Route="LibraryPage" ContentTemplate="{DataTemplate local:LibraryPage}"/>
+        <ShellContent x:Name="PlayerTab" Title="پخش کننده" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconAudioWave.png}" Route="PlayerPage" ContentTemplate="{DataTemplate local:PlayerPage}" />
+        <ShellContent x:Name="ProfileTab" Title="حساب" Icon="{extensions:ImageResource MoodPlayer.Resources.UI.IconUser.png}" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
     </TabBar>
 
 

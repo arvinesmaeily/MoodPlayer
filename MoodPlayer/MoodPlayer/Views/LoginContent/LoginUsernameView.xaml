@@ -3,27 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodPlayer.Views.LoginContent.LoginUsernameView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Forgot Password" Order="Primary"/>
+        <ToolbarItem Text="فراموشی رمز عبور" Order="Primary"/>
     </ContentPage.ToolbarItems>
 
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Account" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
+            <Label Text="حساب کاربری" TextColor="Red" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Title" Margin="0"/>
         </StackLayout>
     </Shell.TitleView>
     <ContentPage.Content>
         <StackLayout>
-        <ScrollView>
-        <StackLayout>
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                    <Entry x:Name="entryUsername" Placeholder="Username" HorizontalOptions="FillAndExpand"/>
-                    <Label Text="Password: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
-                    <Entry x:Name="entryPassword" Placeholder="Password" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Entry x:Name="entryUsername" Placeholder="نام کاربری" HorizontalOptions="FillAndExpand"/>
+                        <Entry x:Name="entryPassword"  FlowDirection="RightToLeft" Placeholder="رمز عبور" HorizontalOptions="FillAndExpand" IsPassword="True"/>
+                    </StackLayout>
+
+                    <Button x:Name="buttonLogin" Clicked="buttonLogin_Clicked" Text="ورود"/>
+                    <!--
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Server IP Address: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"/>
+                        <Label x:Name="LabelCurrentIP" Text="-" TextColor="{DynamicResource Secondary}"/>
+                        <Entry x:Name="EntryNewIP" Text="192.168.1.109:8000"/>
+                        <Button x:Name="ButtonSubmitIP" Text="Submit IP" Clicked="ButtonSubmitIP_Clicked"/>
+                    </StackLayout>-->
                 </StackLayout>
-                <Button x:Name="buttonLogin" Clicked="buttonLogin_Clicked" Text="Login"/>
-        </StackLayout>
-        </ScrollView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -34,6 +34,8 @@ namespace MoodPlayer.Views
             buttonPlay.BindingContext = this.PlayerIcons;
             buttonRepeat.BindingContext = this.PlayerIcons;
 
+            LabelStatus.BindingContext = DataRecordingManager.Status;
+
             Player.MediaPlayer.PositionChanged += PlayerPage_PositionChanged;
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
 

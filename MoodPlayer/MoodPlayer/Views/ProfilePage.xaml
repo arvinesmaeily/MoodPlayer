@@ -9,7 +9,6 @@
             <ImageButton Source="Icon.png" BackgroundColor="Transparent" Padding="2" Margin="2"/>
             <StackLayout Orientation="Vertical">
                 <Label Text="Mood Player" TextColor="{DynamicResource Secondary}" VerticalTextAlignment="Start" FontAttributes="Bold" FontSize="Title" Margin="0"/>
-                <Label Text="Profile" VerticalTextAlignment="Start" Margin="0"/>
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
@@ -20,10 +19,16 @@
             <Frame></Frame>
             <Label Text="MoodPlayer" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
             
-            <StackLayout Orientation="Horizontal">
-                <Label Text="ID: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
-                <Label x:Name="id" Text="{Binding Path=ID}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                <Label x:Name="id" Text="{Binding Path=ID}" />
+                <Label Text="شناسه کاربری: " FontSize="Subtitle" FlowDirection="RightToLeft" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
+                
             </StackLayout>
+            
+            <Frame></Frame>
+            
+
+            
             <!--
             <StackLayout Orientation="Horizontal">
                 <Label Text="Username: " FontSize="Subtitle" FontAttributes="Bold" TextColor="{d:DynamicResource Secondary}"/>
@@ -56,8 +61,8 @@
             <Button x:Name="buttonConnectSpotify" Clicked="buttonConnectSpotify_Clicked" Text="Connect Spotify" BackgroundColor="Green"/>
             -->
             <Frame></Frame>
-            <Label Text="Logout" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
-            <Button x:Name="buttonLogout" Clicked="buttonLogout_Clicked" Text="Logout" BackgroundColor="OrangeRed"/>
+            <Label Text="خروج از حساب کاربری" FontSize="Large" TextColor="{d:DynamicResource SecondaryDark}"/>
+            <Button x:Name="buttonLogout" Clicked="buttonLogout_Clicked" Text="خروج" BackgroundColor="OrangeRed"/>
 
             <Frame></Frame>
         </StackLayout>

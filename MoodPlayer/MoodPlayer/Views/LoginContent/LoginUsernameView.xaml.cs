@@ -27,6 +27,7 @@ namespace MoodPlayer.Views.LoginContent
         {
             InitializeComponent();
 
+            //LabelCurrentIP.Text = APIManager.Resources.BaseURL;
             //labelCaptcha.BindingContext = captcha;
         }
 
@@ -36,7 +37,7 @@ namespace MoodPlayer.Views.LoginContent
             {
                 if (entryUsername.Text.Length < 1 || entryPassword.Text.Length < 1) // || entryCaptcha.Text.Length < 1)
                 {
-                    DisplayAlert("Entry Field Error", "Please fill all the entry fields correctly.", "Okay");
+                    DisplayAlert("خطا در فیلد", "لطفا همه فیلد ها را پر کنید", "بستن");
                 }
                 else
                 {
@@ -52,7 +53,7 @@ namespace MoodPlayer.Views.LoginContent
                     Debug.WriteLine(result.Content.Token);
                     if (result.StatusCode != HttpStatusCode.OK)
                     {
-                        DisplayAlert("Login Error", result.Content.Error, "Okay");
+                        DisplayAlert("خطای ورود به حساب", result.Content.Error, "بستن");
                         //captcha.Generate();
                     }
                     else
@@ -71,8 +72,14 @@ namespace MoodPlayer.Views.LoginContent
             }
             catch (Exception ex)
             {
-                DisplayAlert("Exception Occured!", ex.Message, "Okay");
+                DisplayAlert("خطای پیشبینی نشده", ex.Message, "بستن");
             }
+        }
+
+        private void ButtonSubmitIP_Clicked(object sender, EventArgs e)
+        {
+            //APIManager.Resources.BaseURL = "http://" + EntryNewIP.Text + "/api";
+            //LabelCurrentIP.Text = APIManager.Resources.BaseURL;
         }
     }
 }

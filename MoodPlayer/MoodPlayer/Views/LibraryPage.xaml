@@ -17,11 +17,11 @@
     <TabBar>
         <Tab>
             <!--<ShellContent x:Name="QueueContent" Title="Queue" ContentTemplate="{DataTemplate lc:QueueView}"/>-->
-            <ShellContent x:Name="SongsContent" Title="Songs" ContentTemplate="{DataTemplate lc:SongsView}"/>
-            <ShellContent x:Name="ArtistsContent" Title="Artists" ContentTemplate="{DataTemplate lc:ArtistsView}"/>
+            <ShellContent x:Name="SongsContent" Title="آهنگ ها" ContentTemplate="{DataTemplate lc:SongsView}"/>
+            <!--<ShellContent x:Name="ArtistsContent" Title="Artists" ContentTemplate="{DataTemplate lc:ArtistsView}"/>
             <ShellContent x:Name="AlbumsContent" Title="Albums" ContentTemplate="{DataTemplate lc:AlbumsView}"/>
             <ShellContent x:Name="GenresContent" Title="Genres" ContentTemplate="{DataTemplate lc:GenresView}"/>
-            <!--<ShellContent x:Name="FavouritesContent" Title="Favourites" ContentTemplate="{DataTemplate lc:FavouritesView}"/>-->
+            <ShellContent x:Name="FavouritesContent" Title="Favourites" ContentTemplate="{DataTemplate lc:FavouritesView}"/>-->
         </Tab>
     </TabBar>
 

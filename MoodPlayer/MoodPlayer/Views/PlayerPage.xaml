@@ -48,12 +48,13 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" VerticalOptions="End" Orientation="Vertical">
-                <Label x:Name="labelSongTitle" HorizontalTextAlignment="Center" VerticalOptions="End" Text="-" FontSize="Title" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalOptions="End" Text="-" FontSize="Title" FontAttributes="None" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="labelSongTitle" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="-" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="-" FontSize="Large" FontAttributes="None" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="2" Orientation="Horizontal" VerticalOptions="End" MinimumHeightRequest="10">
+            <StackLayout Grid.Row="2" Orientation="Horizontal" MinimumHeightRequest="10">
                 <ImageButton x:Name="buttonShuffle" Clicked="buttonShuffle_Clicked" Source="{Binding Path=ShuffleIcon}" HorizontalOptions="StartAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
+                <Label Text="{Binding Path=Message}" TextColor="{Binding Path=Color}" FontAttributes="Bold" FontSize="Title" x:Name="LabelStatus" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
                 <ImageButton x:Name="buttonRepeat" Clicked="buttonRepeat_Clicked" Source="{Binding Path=RepeatIcon}" HorizontalOptions="EndAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
             </StackLayout>
 

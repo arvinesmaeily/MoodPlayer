@@ -8,7 +8,7 @@
             <ImageButton Source="Icon.png" BackgroundColor="Transparent" Padding="2" Margin="2"/>
             <StackLayout Orientation="Vertical">
                 <Label Text="Mood Player" TextColor="{DynamicResource Secondary}" VerticalTextAlignment="Start" FontAttributes="Bold" FontSize="Title" Margin="0"/>
-                <Label Text="Settings" VerticalTextAlignment="Start" Margin="0"/>
+                <Label Text="تنظیمات" FlowDirection="RightToLeft" VerticalTextAlignment="Start" Margin="0"/>
             </StackLayout>
         </StackLayout>
     </Shell.TitleView>
