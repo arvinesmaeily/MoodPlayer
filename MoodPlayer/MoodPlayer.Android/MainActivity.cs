@@ -7,7 +7,6 @@ using Android;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
 using Android.Content;
-using AiForms.Dialogs;
 using DataCollectionManager.MasterDataManager;
 
 namespace MoodPlayer.Droid
@@ -50,7 +49,7 @@ namespace MoodPlayer.Droid
         private void PrepareAlertManager()
         {
             global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
-            AiForms.Dialogs.Dialogs.Init(this); //need to write here
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

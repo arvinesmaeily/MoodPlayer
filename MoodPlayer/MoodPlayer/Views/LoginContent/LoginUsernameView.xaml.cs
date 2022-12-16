@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static SQLite.SQLite3;
+//using static SQLite.SQLite3;
 
 namespace MoodPlayer.Views.LoginContent
 {

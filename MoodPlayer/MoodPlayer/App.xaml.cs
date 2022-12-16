@@ -66,15 +66,15 @@ namespace MoodPlayer
         {
             if (action == "start")
             {
-                if (!DataRecordingManager.Status.IsRecording)
+                //if (!DataRecordingManager.Status.IsRecording)
                     DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOn);
-                if (!DataRecordingManager.Status.IsTransmitting)
+                //if (!DataRecordingManager.Status.IsTransmitting)
                     DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOn);
 
             }
             if (action == "stop")
             {
-                if (DataRecordingManager.Status.IsRecording)
+                //if (DataRecordingManager.Status.IsRecording)
                     DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOff);
                 //if (DataRecordingManager.Status.IsTransmitting)
                     //DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
