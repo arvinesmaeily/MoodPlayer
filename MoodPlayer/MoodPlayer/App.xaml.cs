@@ -1,21 +1,12 @@
-﻿
-using APIManager.Account;
-using APIManager.Account.Models.Responses;
-using DependencyManager;
-using DataCollectionManager.MasterDataManager;
-using MoodPlayer.ViewNavigation;
-using MoodPlayer.Views;
-using MusicPlayer;
-using MusicPlayer.MusicUtil;
-using SettingsManager;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using APIManager;
 using APIManager.Music.Models.Responses;
-using APIManager;
+using DataCollectionManager.MasterDataManager;
+using DependencyManager;
+using MoodPlayer.ViewNavigation;
+using MusicPlayer;
+using SettingsManager;
 using System.Net;
+using Xamarin.Forms;
 
 namespace MoodPlayer
 {
@@ -24,27 +15,34 @@ namespace MoodPlayer
         public App()
         {
             InitializeComponent();
+
             CheckCredentials();
+
             var color = (Color)Current.Resources["Secondary"];
 
-            MusicPlayer.Models.MusicData.ThemeColor = (color.ToHex().Remove(0,3));
+            MusicPlayer.Models.MusicData.ThemeColor = (color.ToHex().Remove(0, 3));
 
-            
+
             //Player.Current.SetQueue(Library.Data);
         }
 
         private static string CheckCredentials()
         {
+
             APIManager.Resources.Authorization = AppSettings.AccountSettings.ClientToken;
+
+            DependencyService.Get<IPermissionManager>().CheckPermissions();
+            
+            DependencyService.Get<IScreenManager>().KeepOn();
+
+            Player.Initialize();
+
             if (AppSettings.AccountSettings.ClientAuthorized == true)
             {
                 Response<RetrieveMusicListResponse> tokenValidationResponse = APIManager.Music.MusicManager.RetrieveMusicList();
                 if (tokenValidationResponse.StatusCode == HttpStatusCode.OK)
                 {
                     NavigationManager.GotoMain();
-                    DependencyService.Get<IScreenManager>().KeepOn();
-
-                    Player.Initialize();
 
                     return "Valid Credenials";
 
@@ -66,25 +64,25 @@ namespace MoodPlayer
         {
             if (action == "start")
             {
-                //if (!DataRecordingManager.Status.IsRecording)
+                if (!DataRecordingManager.Status.IsRecording)
                     DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOn);
-                //if (!DataRecordingManager.Status.IsTransmitting)
+                if (!DataRecordingManager.Status.IsTransmitting)
                     DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOn);
 
             }
             if (action == "stop")
             {
-                //if (DataRecordingManager.Status.IsRecording)
+                if (DataRecordingManager.Status.IsRecording)
                     DataRecordingManager.Set(DataRecordingManager.Mode.RecordingOff);
                 //if (DataRecordingManager.Status.IsTransmitting)
-                    //DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
+                //DataRecordingManager.Set(DataRecordingManager.Mode.TransmittingOff);
 
             }
         }
 
         protected override void OnStart()
         {
-            
+
         }
 
         protected override void OnSleep()

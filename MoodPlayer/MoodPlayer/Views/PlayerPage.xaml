@@ -25,46 +25,64 @@
 
         <Grid Margin="5" Padding="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="7*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.25*"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-
-
-            <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <Image x:Name="songImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <!--music image and functionality messages-->
+                <StackLayout Orientation="Vertical" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <!--<Image x:Name="songImage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Image.Source>
                         <UriImageSource Uri="" CachingEnabled="True" CacheValidity="1"/>
                     </Image.Source>
-                </Image>
+                </Image>-->
+
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <StackLayout  VerticalOptions="End" HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                            <Label Text="وضعیت ارسال داده:" FontAttributes="Bold" FontSize="Subtitle" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" FlowDirection="RightToLeft"/>
+                            <Label Text="{Binding Path=Message}" TextColor="{Binding Path=Color}" FontAttributes="Bold" FontSize="Title" x:Name="LabelStatus" FlowDirection="RightToLeft" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout  VerticalOptions="End" HorizontalOptions="StartAndExpand">
+                            <Label Text="داده های ارسال نشده:" FontAttributes="Bold" FontSize="Subtitle" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" FlowDirection="RightToLeft"/>
+                            <Label x:Name="labelRemaining" Text="{Binding Path=RemainingRecords}" FontAttributes="Bold" FontSize="Title" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" FlowDirection="RightToLeft"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+            <!--music title and artist-->
+            <StackLayout Grid.Row="1" VerticalOptions="Center" Orientation="Vertical">
+                <Label x:Name="labelSongTitle" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="{Binding Path=Title}" FontSize="Default" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="{Binding Path=Artist}" FontSize="Default" FontAttributes="None" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" VerticalOptions="End" Orientation="Vertical">
-                <Label x:Name="labelSongTitle" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="-" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="-" FontSize="Large" FontAttributes="None" HorizontalOptions="CenterAndExpand"/>
-            </StackLayout>
-
+            <!--shuffle button and repeat button-->
             <StackLayout Grid.Row="2" Orientation="Horizontal" MinimumHeightRequest="10">
                 <ImageButton x:Name="buttonShuffle" Clicked="buttonShuffle_Clicked" Source="{Binding Path=ShuffleIcon}" HorizontalOptions="StartAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-                <Label Text="{Binding Path=Message}" TextColor="{Binding Path=Color}" FontAttributes="Bold" FontSize="Title" x:Name="LabelStatus" VerticalTextAlignment="End" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                
                 <ImageButton x:Name="buttonRepeat" Clicked="buttonRepeat_Clicked" Source="{Binding Path=RepeatIcon}" HorizontalOptions="EndAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
             </StackLayout>
-
-            <Slider Grid.Row="3" x:Name="sliderPosition" HorizontalOptions="FillAndExpand" VerticalOptions="End" ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}" />
-
+            
+            
+            <!--current playback position slider-->
+            <ProgressBar Grid.Row="3" x:Name="progressBarPosition" Progress="0" HorizontalOptions="FillAndExpand" VerticalOptions="End" ProgressColor="Orange"/>
+            <!-- ThumbColor="{DynamicResource Secondary}" MinimumTrackColor="{DynamicResource Secondary}" MaximumTrackColor="{DynamicResource SecondaryDark}"/>-->
+             
+            <!--position label-->
             <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label x:Name="labelDuration" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="StartAndExpand"/>
-                <Label x:Name="labelPosition" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                <Label x:Name="labelPosition" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="labelDuration" VerticalOptions="End" Text="00:00" FontSize="Small" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-
+            
+            <!--previous button, play/pause button, next button-->
             <StackLayout Grid.Row="5" Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="40">
                 <ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
                     <ImageButton.Source>

@@ -1,7 +1,6 @@
 ﻿using Android.Views;
 using DependencyManager;
 using MoodPlayer.Droid;
-using System;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ScreenManagerImplementation))]

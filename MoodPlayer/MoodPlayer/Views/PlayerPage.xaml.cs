@@ -1,24 +1,12 @@
-﻿using DependencyManager;
-using DataCollectionManager.MasterDataManager;
-using MediaManager.Playback;
-using MediaManager.Player;
-using MediaManager.Queue;
-using MoodPlayer.Extensions;
-using MoodPlayer.Views;
+﻿using DataCollectionManager.MasterDataManager;
+
 using MusicPlayer;
 using MusicPlayer.MusicUtil;
 using SettingsManager;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+using static MusicPlayer.Player;
 
 namespace MoodPlayer.Views
 {
@@ -34,12 +22,59 @@ namespace MoodPlayer.Views
             buttonPlay.BindingContext = this.PlayerIcons;
             buttonRepeat.BindingContext = this.PlayerIcons;
 
-            LabelStatus.BindingContext = DataRecordingManager.Status;
+            labelSongTitle.BindingContext = Player.MediaQueue.CurrentItem;
+            labelSongArtist.BindingContext = Player.MediaQueue.CurrentItem;
 
-            Player.MediaPlayer.PositionChanged += PlayerPage_PositionChanged;
+            
+
+
+
+            Player.MediaPlayer.Paused += MediaPlayer_Paused;
+            Player.MediaPlayer.Playing += MediaPlayer_Playing;
+
+            Player.MediaPlayer.EncounteredError += MediaPlayer_EncounteredError;
+            Player.MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
+            LabelStatus.BindingContext = DataRecordingManager.Status;
+            labelRemaining.BindingContext = DataRecordingManager.Status;
+
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
 
         }
+
+        private void MediaPlayer_PositionChanged(object sender, LibVLCSharp.Shared.MediaPlayerPositionChangedEventArgs e)
+        {
+            Device.BeginInvokeOnMainThread((() =>
+            {
+                long Duration = MediaPlayer.Length;
+                long Position = Convert.ToInt64(e.Position * Duration);
+
+                labelDuration.Text = TimeSpan.FromMilliseconds(Duration).ToString(@"mm\:ss");
+                labelPosition.Text = TimeSpan.FromMilliseconds(Position).ToString(@"mm\:ss");
+                progressBarPosition.Progress = e.Position;
+            }));
+        }
+
+        private void MediaPlayer_EncounteredError(object sender, EventArgs e)
+        {
+            DisplayAlert("پخش با مشکل مواجه شد.", "برنامه را مجددا اجرا کنید", "بستن").ContinueWith((x) => { Application.Current.Quit(); });
+        }
+
+        private void MediaPlayer_Playing(object sender, EventArgs e)
+        {
+            PlayerIcons.PlayIcon = new FileImageSource()
+            {
+                File = "iconpause.png"
+            };
+        }
+
+        private void MediaPlayer_Paused(object sender, EventArgs e)
+        {
+            PlayerIcons.PlayIcon = new FileImageSource()
+            {
+                File = "iconplay.png"
+            };
+        }
+
         override protected void OnAppearing()
         {
             InitializeButtons();
@@ -51,8 +86,8 @@ namespace MoodPlayer.Views
             {
                 Player.MediaQueue.ShuffleModeChanged += MediaQueue_ShuffleModeChanged;
                 Player.MediaQueue.RepeatModeChanged += MediaQueue_RepeatModeChanged;
-                Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
-                PlayerSettings_PropertyChanged(null, null);
+                //Player.PlayerSettings.PropertyChanged += PlayerSettings_PropertyChanged;
+                //PlayerSettings_PropertyChanged(null, null);
                 RepeatModeChangedEventArgs repeatModeChangedEventArgs = new RepeatModeChangedEventArgs() { RepeatMode = Player.MediaQueue.RepeatMode };
                 ShuffleModeChangedEventArgs shuffleModeChangedEventArgs = new ShuffleModeChangedEventArgs() { ShuffleMode = Player.MediaQueue.ShuffleMode };
                 MediaQueue_RepeatModeChanged(null, repeatModeChangedEventArgs);
@@ -60,7 +95,7 @@ namespace MoodPlayer.Views
             });
         }
 
-        private void PlayerSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+/*        private void PlayerSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
             Device.BeginInvokeOnMainThread(() =>
@@ -68,20 +103,14 @@ namespace MoodPlayer.Views
                 //playback mode
                 if (Player.PlayerSettings.IsPlaying)
                 {
-                    PlayerIcons.PlayIcon = new FileImageSource()
-                    {
-                        File = "iconpause.png"
-                    };
+
                 }
                 else if (!(Player.PlayerSettings.IsPlaying))
                 {
-                    PlayerIcons.PlayIcon = new FileImageSource()
-                    {
-                        File = "iconplay.png"
-                    };
+
                 }
             });
-        }
+        }*/
 
         private void MediaQueue_RepeatModeChanged(object sender, RepeatModeChangedEventArgs e)
         {
@@ -148,19 +177,8 @@ namespace MoodPlayer.Views
             {
                 labelSongArtist.Text = Player.MediaQueue.CurrentItem.Artist;
                 labelSongTitle.Text = Player.MediaQueue.CurrentItem.Title;
-                songImage.Source = ImageSource.FromUri(new Uri(Player.MediaQueue.CurrentItem.ImageUri));
-                labelDuration.Text = Player.MediaPlayer.Duration.ToString(@"mm\:ss");
+                //songImage.Source = ImageSource.FromUri(new Uri(Player.MediaQueue.CurrentItem.ImageUri));
             });
-        }
-
-        private void PlayerPage_PositionChanged(object sender, MediaManager.Playback.PositionChangedEventArgs e)
-        {
-
-            Device.BeginInvokeOnMainThread((() =>
-            {
-                labelPosition.Text = e.Position.ToString(@"mm\:ss");
-                sliderPosition.Value = (e.Position.TotalSeconds / Player.MediaPlayer.Duration.TotalSeconds);
-            }));
         }
 
 
@@ -169,14 +187,16 @@ namespace MoodPlayer.Views
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                if (Player.MediaPlayer.State != MediaPlayerState.Playing)
+                //if (Player.MediaPlayer.State != MediaPlayerState.Playing)
                 {
                     Player.Play();
                     App.SetRecordTransmit("start");
                 }
-                else
+                //else
+                {
                     Player.Pause();
-                App.SetRecordTransmit("stop");
+                    App.SetRecordTransmit("stop");
+                }
             });
         }
 
@@ -194,14 +214,10 @@ namespace MoodPlayer.Views
         {
             Player.ChangeShuffle();
         }
-        private void buttonFavorite_Clicked(object sender, EventArgs e)
-        {
-
-        }
 
         private void buttonRepeat_Clicked(object sender, EventArgs e)
         {
-            if (Player.MediaPlayer.Queue.Count > 0)
+            //if (Player.MediaPlayer.Queue.Count > 0)
             {
                 Player.ChangeRepeat();
             }
@@ -217,12 +233,6 @@ namespace MoodPlayer.Views
             {
                 AppSettings.DataCollectionSettings.CollectVoice = true;
             }
-            RenderColors();
-        }
-        
-        private void RenderColors()
-        {
-
         }
     }
 

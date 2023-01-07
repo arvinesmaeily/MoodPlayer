@@ -1,10 +1,6 @@
 ﻿using MoodPlayer.ViewNavigation;
 using SettingsManager;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +12,7 @@ namespace MoodPlayer.Views
         public ProfilePage()
         {
             InitializeComponent();
-            
+
             id.BindingContext = AppSettings.AccountInfo;
 
             //stateSpotify.BindingContext = AppSettings.AccountSettings;
@@ -49,7 +45,7 @@ namespace MoodPlayer.Views
                     DisplayAlert("خطا", "No Response Reecieved.", "بستن");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DisplayAlert("خطا", ex.Message, "بستن");
             }

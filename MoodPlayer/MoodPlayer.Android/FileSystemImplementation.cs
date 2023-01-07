@@ -1,4 +1,4 @@
-﻿using Android.Content;
+﻿/*using Android.Content;
 using DependencyManager;
 using MoodPlayer.Droid;
 using Xamarin.Forms;
@@ -17,4 +17,4 @@ namespace MoodPlayer.Droid
 
         }
     }
-}
+}*/

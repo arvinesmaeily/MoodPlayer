@@ -1,6 +1,4 @@
 ﻿using MoodPlayer.Views;
-using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace MoodPlayer
@@ -11,9 +9,9 @@ namespace MoodPlayer
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(PlayerPage), typeof(PlayerPage));
+            Routing.RegisterRoute(nameof(StatePage), typeof(StatePage));
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         }
 
     }

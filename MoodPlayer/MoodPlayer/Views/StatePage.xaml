@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoodPlayer.Views.StatePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                
+                <!--accelerometer-->
+                <Label Text="سنسور شتاب سنج" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                    <Label x:Name="AccelerationLabel" Text="{Binding Path=Acceleration}"/>
+                </StackLayout>
+                
+                <!--geolocation-->
+                <Label Text="سنسور  GPS" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                    <Label x:Name="LocationLabel" Text="{Binding Path=Location}"/>
+                </StackLayout>
+                
+                <!--music-->
+                <Label Text="پخش کننده موسیقی" FontAttributes="Bold" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand">
+                    
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="TitleLabel" Text="{Binding Path=Title}"/>
+                        <Label x:Name="ArtistLabel" Text="{Binding Path=Artist}"/>
+                        <Label x:Name="AlbumLabel" Text="{Binding Path=Album}"/>
+                        <Label x:Name="IdLabel" Text="{Binding Path=MediaId}"/>
+                        <Label x:Name="DurationLabel" Text="{Binding Path=Duration}"/>
+                        <Label x:Name="PositionLabel" Text="{Binding Path=Position}"/>
+                        <Label x:Name="RepeatLabel" Text="{Binding Path=RepeatMode}"/>
+                        <Label x:Name="ShuffleLabel" Text="{Binding Path=ShuffleMode}"/>
+                        <Label x:Name="VolumeLabel" Text="{Binding Path=Volume}"/>
+                        <Label x:Name="MuteLabel" Text="{Binding Path=Mute}"/>
+
+                    </StackLayout>
+                    
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="نام: "/>
+                        <Label Text="هنرمند: "/>
+                        <Label Text="آلبوم: "/>
+                        <Label Text="شناسه: "/>
+                        <Label Text="مدت زمان: "/>
+                        <Label Text="زمان در حال پخش: "/>
+                        <Label Text="حالت تکرار: "/>
+                        <Label Text="حالت پخش تصادفی: "/>
+                        <Label Text="میزان صدا: "/>
+                        <Label Text="بی صدا: "/>
+                        
+
+                    </StackLayout>
+                    
+
+                    
+                </StackLayout>
+                
+                
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -49,7 +49,7 @@ namespace MoodPlayer.Views.LoginContent
                     }
                     else
                     {
-                        var request = new SignupRequest() { Username= entryUsername.Text, Email = entryEmail.Text, Password = entryPassword.Text };
+                        var request = new SignupRequest() { Username = entryUsername.Text, Email = entryEmail.Text, Password = entryPassword.Text };
                         Response<SignupResponse> result = AccountManager.SignUp(request);
 
                         if (result.StatusCode != HttpStatusCode.OK)
@@ -77,7 +77,7 @@ namespace MoodPlayer.Views.LoginContent
                                 AppSettings.AccountSettings.ClientAuthorized = true;
                                 AppSettings.AccountSettings.ClientToken = Token;
                                 AppSettings.AccountInfo.ID = result2.Content.UserId;
-                                
+
                                 APIManager.Resources.Authorization = Token;
                                 //captcha.Generate();
                                 NavigationManager.GotoMain();

@@ -1,14 +1,6 @@
-﻿using MediaManager.Library;
-using MediaManager.Player;
+﻿
 using MusicPlayer;
-using MusicPlayer.Models;
 using MusicPlayer.MusicUtil;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,11 +20,11 @@ namespace MoodPlayer.Views.LibraryContent
 
         private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if(e.SelectedItem != null)
+            if (e.SelectedItem != null)
             {
                 Library.SetPlaylist(Library.Data);
                 Library.BeginningItem(e.SelectedItemIndex);
-                if (Player.MediaPlayer.State != MediaPlayerState.Playing)
+                if (Player.MediaPlayer.State != LibVLCSharp.Shared.VLCState.Playing)
                     App.SetRecordTransmit("start");
             }
 

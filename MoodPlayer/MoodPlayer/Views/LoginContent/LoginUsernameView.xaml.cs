@@ -2,16 +2,11 @@
 using APIManager.Account;
 using APIManager.Account.Models.Requests;
 using APIManager.Account.Models.Responses;
-using MoodPlayer.Extensions;
 using MoodPlayer.ViewNavigation;
 using SettingsManager;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
