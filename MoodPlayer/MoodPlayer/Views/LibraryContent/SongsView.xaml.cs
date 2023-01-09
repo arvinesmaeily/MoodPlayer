@@ -24,7 +24,7 @@ namespace MoodPlayer.Views.LibraryContent
             {
                 Library.SetPlaylist(Library.Data);
                 Library.BeginningItem(e.SelectedItemIndex);
-                if (Player.MediaPlayer.State != LibVLCSharp.Shared.VLCState.Playing)
+                if (Player.MediaPlayer.IsPlaying)
                     App.SetRecordTransmit("start");
             }
 

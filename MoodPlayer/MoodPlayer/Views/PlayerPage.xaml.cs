@@ -1,5 +1,6 @@
-﻿using DataCollectionManager.MasterDataManager;
-
+﻿using DataCollectionManager.CustomTimer;
+using DataCollectionManager.MasterDataManager;
+using DataCollectionManager.Music.MusicDataUtils;
 using MusicPlayer;
 using MusicPlayer.MusicUtil;
 using SettingsManager;
@@ -14,6 +15,7 @@ namespace MoodPlayer.Views
     {
 
         private PlayerIcons PlayerIcons = new PlayerIcons();
+        private PercisionTimer PercisionTimer = new PercisionTimer(new TimeSpan(0, 0, 0, 1, 0));
 
         public PlayerPage()
         {
@@ -21,58 +23,58 @@ namespace MoodPlayer.Views
             buttonShuffle.BindingContext = this.PlayerIcons;
             buttonPlay.BindingContext = this.PlayerIcons;
             buttonRepeat.BindingContext = this.PlayerIcons;
+            PercisionTimer.ThresholdReachedMilliSecond += PercisionTimer_ThresholdReachedMilliSecond;
 
-            labelSongTitle.BindingContext = Player.MediaQueue.CurrentItem;
-            labelSongArtist.BindingContext = Player.MediaQueue.CurrentItem;
+            //labelSongTitle.BindingContext = Player.MediaQueue.CurrentItem;
+            //labelSongArtist.BindingContext = Player.MediaQueue.CurrentItem;
 
-            
+            //foreach(var player in Player.MediaPlayers.Values)
+            {
+                //player.Paused += MediaPlayer_Paused;
+                //player.Playing += MediaPlayer_Playing;
+
+
+                //player.PositionChanged += MediaPlayer_PositionChanged;
+            }
 
 
 
-            Player.MediaPlayer.Paused += MediaPlayer_Paused;
-            Player.MediaPlayer.Playing += MediaPlayer_Playing;
-
-            Player.MediaPlayer.EncounteredError += MediaPlayer_EncounteredError;
-            Player.MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
             LabelStatus.BindingContext = DataRecordingManager.Status;
             labelRemaining.BindingContext = DataRecordingManager.Status;
 
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
+            InitializeButtons();
+            PercisionTimer.TurnOn();
 
         }
 
-        private void MediaPlayer_PositionChanged(object sender, LibVLCSharp.Shared.MediaPlayerPositionChangedEventArgs e)
+        private void PercisionTimer_ThresholdReachedMilliSecond(object sender, TimerThresholdReachedEventArgs e)
         {
             Device.BeginInvokeOnMainThread((() =>
             {
-                long Duration = MediaPlayer.Length;
-                long Position = Convert.ToInt64(e.Position * Duration);
+                double Duration = MediaPlayer.Duration;
+                double Position = MediaPlayer.CurrentPosition;
 
-                labelDuration.Text = TimeSpan.FromMilliseconds(Duration).ToString(@"mm\:ss");
-                labelPosition.Text = TimeSpan.FromMilliseconds(Position).ToString(@"mm\:ss");
-                progressBarPosition.Progress = e.Position;
+                labelDuration.Text = TimeSpan.FromSeconds(Duration).ToString(@"mm\:ss");
+                labelPosition.Text = TimeSpan.FromSeconds(Position).ToString(@"mm\:ss");
+                progressBarPosition.Progress = Position / Duration;
+
+                if (MediaPlayer.IsPlaying)
+                {
+                    PlayerIcons.PlayIcon = new FileImageSource()
+                    {
+                        File = "iconpause.png"
+                    };
+                }
+                else
+                {
+                    PlayerIcons.PlayIcon = new FileImageSource()
+                    {
+                        File = "iconplay.png"
+                    };
+                }
+
             }));
-        }
-
-        private void MediaPlayer_EncounteredError(object sender, EventArgs e)
-        {
-            DisplayAlert("پخش با مشکل مواجه شد.", "برنامه را مجددا اجرا کنید", "بستن").ContinueWith((x) => { Application.Current.Quit(); });
-        }
-
-        private void MediaPlayer_Playing(object sender, EventArgs e)
-        {
-            PlayerIcons.PlayIcon = new FileImageSource()
-            {
-                File = "iconpause.png"
-            };
-        }
-
-        private void MediaPlayer_Paused(object sender, EventArgs e)
-        {
-            PlayerIcons.PlayIcon = new FileImageSource()
-            {
-                File = "iconplay.png"
-            };
         }
 
         override protected void OnAppearing()
@@ -187,12 +189,12 @@ namespace MoodPlayer.Views
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                //if (Player.MediaPlayer.State != MediaPlayerState.Playing)
+                if (!Player.MediaPlayer.IsPlaying)
                 {
                     Player.Play();
                     App.SetRecordTransmit("start");
                 }
-                //else
+                else
                 {
                     Player.Pause();
                     App.SetRecordTransmit("stop");
@@ -223,17 +225,6 @@ namespace MoodPlayer.Views
             }
         }
 
-        private void buttonRecord_Clicked(object sender, EventArgs e)
-        {
-            if (AppSettings.DataCollectionSettings.CollectVoice == true)
-            {
-                AppSettings.DataCollectionSettings.CollectVoice = false;
-            }
-            else
-            {
-                AppSettings.DataCollectionSettings.CollectVoice = true;
-            }
-        }
     }
 
 }

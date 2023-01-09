@@ -5,20 +5,20 @@
              x:Class="MoodPlayer.Views.LibraryContent.SongsView">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewItems" RowHeight="70" ItemSelected="listViewItems_ItemSelected"  SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" >
+            <ListView x:Name="listViewItems" RowHeight="100" ItemSelected="listViewItems_ItemSelected"  SeparatorVisibility="Default" SeparatorColor="{DynamicResource SecondaryDark}" VerticalOptions="FillAndExpand" >
 
                 <ListView.ItemTemplate x:DataType="{DataTemplate template:MediaItem}">
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
                                 <!--<Image>
                                     <Image.Source>
                                         <UriImageSource Uri="{Binding Path=ImageUri}" CachingEnabled="True" CacheValidity="7"/>
                                     </Image.Source>
                                 </Image>-->
-                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                                    <Label Text="{Binding Path=Title}" FontAttributes="Bold" FontSize="Large"/>
-                                    <Label Text="{Binding Path=Artist}"/>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="{Binding Path=Title}" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding Path=Artist}" VerticalTextAlignment="Center"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

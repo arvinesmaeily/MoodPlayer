@@ -28,12 +28,13 @@ namespace MoodPlayer.Views.LibraryContent
         private void listViewItems_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
 
-            Library.SetPlaylist(MediaItems);
-            Library.BeginningItem(e.SelectedItemIndex);
-            if (Player.MediaPlayer.State != LibVLCSharp.Shared.VLCState.Playing)
-                App.SetRecordTransmit("start");
+            //Library.SetPlaylist(MediaItems);
+            //Library.BeginningItem(e.SelectedItemIndex);
 
-            listViewItems.SelectedItem = null;
+           // if (!Player.MediaPlayer.IsPlaying)
+            //    App.SetRecordTransmit("start");
+
+            //listViewItems.SelectedItem = null;
 
         }
     }

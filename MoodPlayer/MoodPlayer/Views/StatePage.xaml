@@ -32,7 +32,7 @@
                         <Label x:Name="RepeatLabel" Text="{Binding Path=RepeatMode}"/>
                         <Label x:Name="ShuffleLabel" Text="{Binding Path=ShuffleMode}"/>
                         <Label x:Name="VolumeLabel" Text="{Binding Path=Volume}"/>
-                        <Label x:Name="MuteLabel" Text="{Binding Path=Mute}"/>
+                        <Label x:Name="MuteLabel" Text="{Binding Path=Muted}"/>
 
                     </StackLayout>
                     
