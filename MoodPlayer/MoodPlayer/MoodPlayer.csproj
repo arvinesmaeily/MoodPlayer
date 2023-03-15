@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <UserSecretsId>1b243ed0-ddf4-4b5a-b8a2-b66a2b5de262</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -50,6 +51,7 @@
     <ProjectReference Include="..\..\..\DataCollectionManager-MoodPlayer\DataCollectionManager\DataCollectionManager.csproj" />
     <ProjectReference Include="..\..\..\MusicPlayer-MoodPlayer\MusicPlayer\MusicPlayer.csproj" />
     <ProjectReference Include="..\..\..\SettingsManager-MoodPlayer\SettingsManager\SettingsManager.csproj" />
+    <ProjectReference Include="..\..\RecommenderManager\RecommenderSystem.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,9 +3,11 @@ using DataCollectionManager.MasterDataManager;
 using DataCollectionManager.Music.MusicDataUtils;
 using MusicPlayer;
 using MusicPlayer.MusicUtil;
+using RecommenderSystem;
 using SettingsManager;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MusicPlayer.Player;
 
@@ -17,35 +19,49 @@ namespace MoodPlayer.Views
         private PlayerIcons PlayerIcons = new PlayerIcons();
         private PercisionTimer PercisionTimer = new PercisionTimer(new TimeSpan(0, 0, 0, 1, 0));
 
+        private bool Continue = false;
+
         public PlayerPage()
         {
             InitializeComponent();
-            buttonShuffle.BindingContext = this.PlayerIcons;
+            //buttonShuffle.BindingContext = this.PlayerIcons;
             buttonPlay.BindingContext = this.PlayerIcons;
-            buttonRepeat.BindingContext = this.PlayerIcons;
+            //buttonRepeat.BindingContext = this.PlayerIcons;
             PercisionTimer.ThresholdReachedMilliSecond += PercisionTimer_ThresholdReachedMilliSecond;
-
-            //labelSongTitle.BindingContext = Player.MediaQueue.CurrentItem;
-            //labelSongArtist.BindingContext = Player.MediaQueue.CurrentItem;
-
-            //foreach(var player in Player.MediaPlayers.Values)
-            {
-                //player.Paused += MediaPlayer_Paused;
-                //player.Playing += MediaPlayer_Playing;
-
-
-                //player.PositionChanged += MediaPlayer_PositionChanged;
-            }
-
-
-
+            
             LabelStatus.BindingContext = DataRecordingManager.Status;
             labelRemaining.BindingContext = DataRecordingManager.Status;
 
             Player.MediaQueue.CurrentItemChanged += MediaQueue_CurrentItemChanged;
+
             InitializeButtons();
             PercisionTimer.TurnOn();
 
+            Recommender.RecommenderState.PropertyChanged += RecommenderState_PropertyChanged;
+            Player.MediaPlayer.PlaybackEnded += MediaPlayer_PlaybackEnded;
+            
+            Library.Load();
+            Library.SetPlaylist(Library.Data);
+        }
+
+        private void MediaPlayer_PlaybackEnded(object sender, EventArgs e)
+        {
+            if (Continue)
+            {
+                Recommender.RecommenderState.SessionId = DataRecordingManager.SessionId;
+                Recommender.RecommenderState.FirstSequence = Recommender.RecommenderState.LastSequence;
+                Recommender.RecommenderState.LastSequence = DataRecordingManager.SequenceId;
+                Recommender.GetRecommendation();
+            }
+        }
+
+        private void RecommenderState_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "RecommendedMusic" && Continue)
+            {
+
+                Player.RecommendPlay(Recommender.RecommenderState.RecommendedMusic);
+            }
         }
 
         private void PercisionTimer_ThresholdReachedMilliSecond(object sender, TimerThresholdReachedEventArgs e)
@@ -174,7 +190,6 @@ namespace MoodPlayer.Views
 
         private void MediaQueue_CurrentItemChanged(object sender, MusicPlayer.MusicUtil.CurrentItemChangedEventArgs e)
         {
-
             Device.BeginInvokeOnMainThread(() =>
             {
                 labelSongArtist.Text = Player.MediaQueue.CurrentItem.Artist;
@@ -183,21 +198,36 @@ namespace MoodPlayer.Views
             });
         }
 
-
         private void buttonPlay_Clicked(object sender, EventArgs e)
         {
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                if (!Player.MediaPlayer.IsPlaying)
-                {
-                    Player.Play();
-                    App.SetRecordTransmit("start");
+            if (!Player.MediaPlayer.IsPlaying)
+            {
+                    Task.Run(() =>
+                    {
+                        Continue = true;
+                        App.SetRecordTransmit("start");
+
+                        Recommender.RecommenderState.SessionId = DataRecordingManager.SessionId;
+                        Recommender.RecommenderState.FirstSequence = 0;
+                        Recommender.RecommenderState.LastSequence = 0;
+                        Recommender.GetRecommendation();
+                    });
+
                 }
                 else
                 {
-                    Player.Pause();
+                    Continue= false;
+                    buttonPlay.IsVisible = false;
+                    Player.Stop();
                     App.SetRecordTransmit("stop");
+
+                    Recommender.RecommenderState.SessionId = DataRecordingManager.SessionId;
+                    Recommender.RecommenderState.FirstSequence = Recommender.RecommenderState.LastSequence;
+                    Recommender.RecommenderState.LastSequence = DataRecordingManager.SequenceId;
+                    Recommender.GetRecommendation();
                 }
             });
         }

@@ -64,12 +64,12 @@
                 <Label x:Name="labelSongArtist" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Text="{Binding Path=Artist}" FontSize="Default" FontAttributes="None" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
 
-            <!--shuffle button and repeat button-->
+            <!--shuffle button and repeat button
             <StackLayout Grid.Row="2" Orientation="Horizontal" MinimumHeightRequest="10">
                 <ImageButton x:Name="buttonShuffle" Clicked="buttonShuffle_Clicked" Source="{Binding Path=ShuffleIcon}" HorizontalOptions="StartAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
                 
                 <ImageButton x:Name="buttonRepeat" Clicked="buttonRepeat_Clicked" Source="{Binding Path=RepeatIcon}" HorizontalOptions="EndAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-            </StackLayout>
+            </StackLayout>-->
             
             
             <!--current playback position slider-->
@@ -84,17 +84,17 @@
             
             <!--previous button, play/pause button, next button-->
             <StackLayout Grid.Row="5" Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="40">
-                <ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
+                <!--<ImageButton x:Name="buttonPrev" Clicked="buttonPrev_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
                     <ImageButton.Source>
                         <FileImageSource File="iconprev.png"/>
                     </ImageButton.Source>
-                </ImageButton>
+                </ImageButton>-->
                 <ImageButton x:Name="buttonPlay" Clicked="buttonPlay_Clicked" Source="{Binding Path=PlayIcon}" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}"/>
-                <ImageButton x:Name="buttonNext" Clicked="buttonNext_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
+               <!--<ImageButton x:Name="buttonNext" Clicked="buttonNext_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="2" BackgroundColor="{DynamicResource Secondary}">
                     <ImageButton.Source>
                         <FileImageSource File="iconnext.png"/>
                     </ImageButton.Source>
-                </ImageButton>
+                </ImageButton>-->
             </StackLayout>
         </Grid>
 
